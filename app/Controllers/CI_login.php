@@ -14,12 +14,19 @@ namespace App\Controllers;
  * @package CodeIgniter
  */
 
+use App\Models\CI_Model_connection;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
 class CI_login extends Controller{
+    public function __construct()
+    {
+        $this->helpers(['form','session','url']);
+
+    }
+
 
     public function index(){
         echo "Hello world";
@@ -28,7 +35,6 @@ class CI_login extends Controller{
     public function login(){
         $validation =  \Config\Services::validation();
 
-        helper(['form', 'url']);
         if(!$this->validate()){
             $validation->setRules([
                 'email'        => 'required|valid_email',
@@ -36,7 +42,19 @@ class CI_login extends Controller{
             ]);
             //Pas connecté donc page de login ici
         }else{
-            // Connexion réussie.
+
+            $data['email'] = $this->request->getPost('Email');
+            $data['password'] = password_hash($this->request->getPost('Pwd'),PASSWORD_DEFAULT);
+            $modelConnection = new CI_Model_connection();
+            if($modelConnection->login($data)){
+                $session = session();
+
+                $data_session = ['email'=> $data['email'],
+                                    'logged'=> true];
+                $session->set($data_session);
+                // Connexion réussie.
+                return redirect()->to('CI_MainMenu');
+            }
         }
     }
     public function register(){
@@ -51,10 +69,18 @@ class CI_login extends Controller{
             ]);
 
         }else{
-            $email = $this->input->post('Email');
-            $password = password_hash($this->input->post('Pwd'),PASSWORD_DEFAULT);
+            $data['email']= $this->request->getPost('email');
+            $data['nom']= $this->request->getPost('nom');
+            $date['password'] = password_hash($this->request->getPost('password'),PASSWORD_DEFAULT);
+            $modelConnection = new CI_Model_connection();
+            $modelConnection->register($data);
             //Inscription réussie.
         }
+    }
+    public function disconnect(){
+        $session = session();
+
+        $session->destroy();
     }
 }
 ?>

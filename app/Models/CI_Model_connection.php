@@ -1,6 +1,8 @@
 <?php namespace App\Models;
 
+use CodeIgniter\Database\ConnectionInterface;
 use CodeIgniter\Model;
+use CodeIgniter\Validation\ValidationInterface;
 
 class CI_Model_connection extends Model
 {
@@ -22,14 +24,13 @@ class CI_Model_connection extends Model
     protected $skipValidation     = false;
 
 
-
-    public function register($email,$password){
+    public function register($data){
         $data =[
-            'email'=> $email,
-            'password' =>$password
+            'email'=> $data['email'],
+            'password' =>$data['password']
         ];
         $query = $this->db->select()
-            ->$this->where(['email' => $email, 'password' => $password])
+            ->$this->where(['email' => $data['email'],'nom'=> $data['nom'],'prenom'=>$data['prenom'], 'password' => $data['password']])
             ->get()->result();
 
         if(empty($query)){
@@ -40,9 +41,9 @@ class CI_Model_connection extends Model
             return false;
         }
     }
-    public function login($email,$password){
+    public function login($data){
         $query = $this->db->select()
-                ->$this->where(['email' => $email, 'password' => $password])
+                ->$this->where(['email' => $data['email'], 'password' => $data['password']])
                 ->get()->result();
 
         return !empty($query); //Si une ligne est retournée alors le compte existe
