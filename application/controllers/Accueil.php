@@ -5,7 +5,7 @@ class Accueil extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('session');
-			$this->load->helper('url');
+		$this->load->helper('url');
 		$this->load->library('form_validation');
 		$this->load->library('email');
 		$this->load->model('Model_connexion');
@@ -23,7 +23,18 @@ class Accueil extends CI_Controller
 		$this->load->view('View_Covidetecteur');
 	}
 
+	public function validate_email($email)	{ // règle qui renvoie si oui ou non l'email est dans la BD
 
+		if ($this->Model_connexion->getCount($email)>0)
+		{
+			return TRUE;
+		}
+		else
+		{
+
+			return FALSE;
+		}
+	}
 	public function login() //Affiche la page de connexion
 
 	{
@@ -76,9 +87,9 @@ class Accueil extends CI_Controller
 
 		$this->form_validation->set_rules('firstname', 'firstname', 'required|alpha_numeric_spaces');
 		$this->form_validation->set_rules('name', 'name', 'required|alpha_numeric_spaces');
-		$this->form_validation->set_rules('email', 'Email', 'valid_email|required|is_unique[user.email]|is_unique[user_waiting.email]');
+		$this->form_validation->set_rules('email', 'Email', 'valid_email|required|is_unique[user.email]|is_unique[PT_user.email]');
 		$this->form_validation->set_rules('password', 'Mot de passe', 'required|alpha_numeric|min_length[8]');
-		$this->form_validation->set_rules('password_confirm', 'Mot de passe de confirmation', 'required|alpha_numeric|matches[Pwd]');
+		$this->form_validation->set_rules('password_confirm', 'Mot de passe de confirmation', 'required|alpha_numeric|matches[password]');
 
 		$this->form_validation->set_message('is_unique', '{field} est déjà présent dans la base.');
 
@@ -87,16 +98,14 @@ class Accueil extends CI_Controller
 
 			$firstname = ($this->input->post('firstname'));
 			$name = ($this->input->post('name'));
-
-			$email = $this->input->post('Email');
-			$password = $this->input->post('Pwd');
-			$pwdhash = password_hash($password, PASSWORD_DEFAULT);
+			$email = $this->input->post('email');
+			$password = password_hash($this->input->post('password'),PASSWORD_DEFAULT);
 
 			$data = array(
 				'firstname' => $firstname,
 				'name'=>$name,
 				'email' => $email,
-				'password' => $pwdhash,
+				'password' => $password,
 			);
 		$this->Model_connexion->createNewUser($data);
 		}else {
@@ -105,7 +114,7 @@ class Accueil extends CI_Controller
 				$this->load->view('View_inscription');
 			}else{
 				$this->load->view('template/View_template');
-
+				echo "erreur";
 				//$this->load->view('errors/View_inscription_error');
 
 			}

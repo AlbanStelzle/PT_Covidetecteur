@@ -70,7 +70,7 @@
 			echo form_input(['type'=>'password',
 								'class'=> 'form-control',
 								'placeholder'=>'Confirmez votre mot de passe',
-								'name'=>'password']);
+								'name'=>'password_confirm']);
           ?>
         <br>
 
