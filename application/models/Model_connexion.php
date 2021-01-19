@@ -16,6 +16,25 @@ class model_connexion extends CI_Model
 		return $row;
 
 	}
+	public function login($data){
+		$this->db->select('*');
+		$this->db->from('PT_user');
+		$this->db->where(['email'=>$data['email']]);
+		$query = $this->db->get();
+		$result = $query->row_array();
+		echo print_r($result);
+		if (isset($result)) {
+
+			if (password_verify($data['password'], $result['password'])) {
+
+				return $result;
+			}else{
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
 	public function getCount($email){
 		$this->db->where('email',$email);
 		$this->db->from('PT_user');
