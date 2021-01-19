@@ -66,11 +66,17 @@ $this->load->helper('form');
 
 
 
+
           echo "<div class=\"text-center\">";
+
+		  echo "Rester connecté ".form_checkbox('staylogged','true');
+		  echo "<br>";
           echo form_submit(['type'=>'submit',
                             'class'=>'btn btn-success rounded-pill',
                             'style'=>'width:50%',
                             ],"Se connecter");
+
+
           echo form_close();
           ?>
       </div>

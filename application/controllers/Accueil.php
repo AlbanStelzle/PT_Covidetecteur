@@ -9,12 +9,15 @@ class Accueil extends CI_Controller
 		$this->load->library('form_validation');
 		$this->load->library('email');
 		$this->load->model('Model_connexion');
+		//gsession_destroy();
+		if($this->session->has_userdata('nom')) { //Si une session existe alors renvoie au menu
+			redirect('MenuPrincipal');
+		}
 
 	}
 
 	public function index()
 	{
-		$this->session->sess_destroy();
 		$this->homePage();
 	}
 	function homePage() //affiche la page d'accueil
@@ -54,6 +57,10 @@ class Accueil extends CI_Controller
 						'firstname' => $data_result['firstname'],
 						'logged'=> true
 	 				);
+	 				if($this->input->post('staylogged')!=null ){
+						$this->config->sess_expiration= 5;
+
+					}
 	 				$this->session->set_userdata($session_data);
 	 				sleep(1); //anti force brute
 	 				redirect(MenuPrincipal);
