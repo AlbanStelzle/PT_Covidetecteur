@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="../../public/css/inscription.css">
-<title>Le Covidétecteur</title>
 
-<link rel="icon" href="../../public/images/logo2.png">
-
-</head>
 
 <body>
   
@@ -18,7 +10,7 @@
   <ul class="navbar-nav">
     <li class="nav-item active">
       <a href="">
-        <img src="../../public/images/icon-home.png" style="width:50%">
+        <img src="<?php echo base_url()?>/images/icon-home.png" style="width:50%">
       </a>
     </li>
   </ul>
@@ -31,7 +23,7 @@
           </li>
           <li class="nav-item">
             <a href="">
-              <img src="../../public/images/icon-info.png" alt="logo" style="width:75%" >
+              <img src="<?php echo base_url()?>/images/icon-info.png" alt="logo" style="width:75%" >
             </a>
           </li>
         </ul>
@@ -48,25 +40,49 @@
 
         <!-- Logo -->
         <div class="text-center">
-          <img src="../../public/images/logo.png" alt="logo" style="width:20%" unselectable="on">
+          <img src="<?php echo base_url()?>/images/logo.png" alt="logo" style="width:20%" unselectable="on">
         </div>
 
         <br>
 
         <!-- Form -->
         <div class="form-group">
-          <input type="email" class="form-control" placeholder="Email" id="pwd" name="password">
-        </div>
-        <div class="form-group">
-          <input type="password" class="form-control" placeholder="Mot de passe" id="pwd" name="password">
-        </div>
+			<?php echo form_open();
+			echo form_input(['type'=>'text',
+								'class'=> 'form-control',
+								'placeholder'=>'Prénom',
+								'name'=>'firstname']);
 
+			echo form_input(['type'=>'text',
+								'class'=> 'form-control',
+								'placeholder'=>'Nom',
+								'name'=>'name']);
+
+			echo form_input(['type'=>'email',
+								'class'=> 'form-control',
+								'placeholder'=>'Adresse email',
+								'name'=>'email']);
+
+			echo form_input(['type'=>'password',
+								'class'=> 'form-control',
+								'placeholder'=>'Mot de passe',
+								'name'=>'password']);
+			echo form_input(['type'=>'password',
+								'class'=> 'form-control',
+								'placeholder'=>'Confirmez votre mot de passe',
+								'name'=>'password']);
+          ?>
         <br>
 
         <!-- Confirmation button -->
         <div class="text-center">
-         <button type="button" class="btn btn-success rounded-pill" style="width:50%">Se connecter</button>
-        </div>
+			<?php
+			echo form_submit(['type'=>'submit',
+							'class'=>'btn btn-success rounded-pill',
+							'style'=>'width:50%'],"S'inscrire");
+			echo form_close();
+			?>
+		</div>
 
         <br>
 

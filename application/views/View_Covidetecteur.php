@@ -53,7 +53,7 @@ $this->load->helper('html');?>
 <div class="inscription">
     <?php
 
-    echo anchor('Accueil', 	img('images/bouton-inscription.png'));
+    echo anchor('Accueil/register', 	img('images/bouton-inscription.png'));
     ?>
 
 </div>

@@ -4,15 +4,7 @@ $this->load->helper('form');
 <!DOCTYPE html>
 <html>
 
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="<?php echo base_url()?>/css/inscription.css">
-<title>Le Covidétecteur</title>
 
-<link rel="icon" href="<?php echo base_url()?>/images/logo2.png">
-
-</head>
 
 <body>
   
@@ -61,15 +53,6 @@ $this->load->helper('form');
           echo form_open();
           echo "<div class=\"form-group\">";
 
-          echo form_input(['type'=>'text',
-                            'placeholder'=>'Nom',
-                            'class'=>'form-control',
-                            'name'=>'name']);
-
-		  echo form_input(['type'=>'text',
-				  'placeholder'=>'Prénom',
-				  'class'=>'form-control',
-				  'name'=>'firstname']);
 
           echo form_input(['type'=>'email',
                             'placeholder'=>'Adresse email',
@@ -81,16 +64,13 @@ $this->load->helper('form');
               'class'=>'form-control',
               'name'=>'password']);
 
-          echo form_input(['type'=>'password',
-              'placeholder'=>'Confirmer mot de passe',
-              'class'=>'form-control',
-              'name'=>'password-confirm']);
+
 
           echo "<div class=\"text-center\">";
           echo form_submit(['type'=>'submit',
                             'class'=>'btn btn-success rounded-pill',
                             'style'=>'width:50%',
-                            ],"S'inscrire");
+                            ],"Se connecter");
           echo form_close();
           ?>
       </div>
