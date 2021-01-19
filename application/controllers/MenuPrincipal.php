@@ -1,0 +1,50 @@
+<?php
+class MenuPrincipal extends CI_Controller
+{
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->library('session');
+		$this->load->helper('url');
+		$this->load->library('form_validation');
+		$this->load->library('email');
+		$this->load->model('Model_connexion');
+		if(!isset($this->session->logged)) { //Si aucune session existe alors renvoie à l'accueil
+			redirect('Accueil');
+		}
+
+	}
+
+	public function index()
+	{
+	}
+	public function add_detector(){
+
+
+		$this->form_validation->set_rules('name', 'name', 'required|max_length[25]');
+		$this->form_validation->set_rules('id', 'id', 'required|max_length[25]');
+
+		$this->form_validation->set_message('is_unique', '{field} est déjà présent dans la base.');
+
+
+		if ($this->form_validation->run()) {
+
+			$data['name'] = $this->input->post('name');
+			$data['id'] = $this->input->post('id');
+			$data['email']=$this->session->email;
+		}else {
+			if($this->form_validation->error_array() == null){
+				$this->load->view('template/View_template');
+				$this->load->view('View_inscription');
+			}else{
+				$this->load->view('template/View_template');
+
+				//$this->load->view('errors/View_inscription_error');
+
+			}
+
+		}
+
+	}
+
+}

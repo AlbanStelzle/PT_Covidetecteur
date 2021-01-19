@@ -21,13 +21,12 @@ class model_connexion extends CI_Model
 		$this->db->from('PT_user');
 		$this->db->where(['email'=>$data['email']]);
 		$query = $this->db->get();
-		$result = $query->row_array();
-		echo print_r($result);
-		if (isset($result)) {
+		foreach ($query->result_array() as $array);
 
-			if (password_verify($data['password'], $result['password'])) {
+		if (isset($array)) {
 
-				return $result;
+			if (password_verify($data['password'], $array['password'])) {
+				return $array;
 			}else{
 				return false;
 			}

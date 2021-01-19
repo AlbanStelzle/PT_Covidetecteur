@@ -14,7 +14,7 @@ class Accueil extends CI_Controller
 
 	public function index()
 	{
-		//$this->session->sess_destroy();
+		$this->session->sess_destroy();
 		$this->homePage();
 	}
 	function homePage() //affiche la page d'accueil
@@ -46,21 +46,21 @@ class Accueil extends CI_Controller
 	 	if ($this->form_validation->run()) {
 	 		$data['email'] = $this->input->post('email');
 	 		$data['password'] = $this->input->post('password');
-	 		if ($data_result=$this->Model_connexion->login($data)!= false){
-		 			session_start();
+			$data_result=$this->Model_connexion->login($data);
+	 		if ($data_result!= false){
 	 				$session_data = array(
-	 					'login' => $data_result->login,
-						'email' => $data_result->email,
-						'name' => $data_result->name,
-						'firstname' => $data_result->firstname,
-						'logged-in'=> true
+						'email' => $data_result['email'],
+						'name' => $data_result['name'],
+						'firstname' => $data_result['firstname'],
+						'logged'=> true
 	 				);
 	 				$this->session->set_userdata($session_data);
 	 				sleep(1); //anti force brute
-	 				//redirect(MenuPrincipal);
+	 				redirect(MenuPrincipal);
 
 	 			} else {
 	 				$this->load->view('template/View_template');
+	 				echo "erreur login";
 	 			//	$this->load->view('errors/View_login_error');
 	 			}
 
