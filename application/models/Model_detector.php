@@ -10,8 +10,25 @@ class Model_detector extends CI_Model
 		$this->db->select('*');
 		$this->db->where(['email'=>$email]);
 		$query=$this->db->get('PT_list_detector');
-		foreach ($query->result_array() as $array);
-		return $array;
+
+
+			$result = $query->result_array();
+			if($result != null){
+				$i=0;
+				foreach($result as $row){
+				foreach($row as $key => $value){
+					$data["detecteur"][$i][$key] = $value;
+
+				}
+					$i++;
+
+				}
+				return $data;
+		}else{
+				return [];
+			}
+
+		//return $array;
 
 	}
 }

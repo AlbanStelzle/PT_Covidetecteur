@@ -12,12 +12,14 @@ class MenuPrincipal extends CI_Controller
 		if(($this->session->has_userdata('blablbl'))) { //Si aucune session existe alors renvoie à l'accueil
 			redirect('Accueil');
 		}
-
+		$this->load->model('Model_detector');
 	}
 
 	public function index()
 	{
-
+		$detecteur = $this->Model_detector->getAllDetector($this->session->email);
+		$this->load->view('template/View_template');
+		$this->load->view('View_menu',$detecteur);
 		}
 	public function add_detector(){
 
