@@ -39,30 +39,42 @@
 
   <!-- 1er container contenant 3 cartes blanche -->
   <div class="container" style="width:90%">
-    <div class="row">
-      <div class="col">
+
 
         <!-- première carte blanche du premier container -->
 		  <?php
 			//print_r($detecteur);
+		  $i = 0;
 		  foreach($detecteur as $key){
-		  	?>
-		  <div class="container " style="width:90%;" >
-			  <div class="card border-0 shadow my-4" style="height: 250px;">
-				  <div class="card-body p-3" id="white_card_1_1">
+
+		  	if( $i == 0) {
+				echo "<div class=\"card-group\">";
+			}
+		  		echo '<div class="card border-0 shadow my-2 mx-2" style="height: 250px;">
+				  <div class="card-body p-3" id="">
 
 					  <div class="text-center" >
-						  <h5>Emplacement: <?php echo $key["name"] ?></h5>
+						  <h5>Emplacement: '.$key["name"].' </h5>
+						  ';
+		  	if($key["lastdata"] > 300){
+		  		echo '<div class="alert alert-danger" role="alert">
+  Seuil de CO2 dépassé ('.$key["lastdata"].'). Il est préférable d\'aérer la pièce.
+</div>';
+			}
+						echo '
+						  <button class="btn btn-primary" onclick="location.href =\'MenuPrincipal/info/'.$key["id"].'\'">Voir les statistiques globales</button>
 					  </div>
 
 				  </div>
-			  </div>
-		  </div>
-		  <?php
+			  </div>';
+		  	if($i ==2){
+		  		echo '</div>';
+		  		$i=-1;
+			}
+		  	$i++;
 		  }
 		  ?>
-        <div class="container " style="width:90%;" >   
-          <div class="card border-0 shadow my-4" style="height: 250px;">
+          <div class="card border-0 shadow my-2 mx-2" style="height: 250px;">
             <div class="card-body p-3" id="white_card_1_1">
 
             <div class="text-center" >
@@ -70,10 +82,9 @@
                 <img src="<?php echo base_url()?>/images/icon-cross.png" alt="logo" style="width:25%" >
               </a>
             </div>
+			</div>
 
           </div>
-        </div>
-      </div>
 
     </div>
 
