@@ -9,7 +9,7 @@ class MenuPrincipal extends CI_Controller
 		$this->load->library('form_validation');
 		$this->load->library('email');
 		$this->load->model('Model_connexion');
-		if($this->session->has_userdata('nom')) { //Si aucune session existe alors renvoie à l'accueil
+		if(($this->session->has_userdata('blablbl'))) { //Si aucune session existe alors renvoie à l'accueil
 			redirect('Accueil');
 		}
 
@@ -17,7 +17,8 @@ class MenuPrincipal extends CI_Controller
 
 	public function index()
 	{
-	}
+
+		}
 	public function add_detector(){
 
 

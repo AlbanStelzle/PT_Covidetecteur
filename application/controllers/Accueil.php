@@ -9,7 +9,6 @@ class Accueil extends CI_Controller
 		$this->load->library('form_validation');
 		$this->load->library('email');
 		$this->load->model('Model_connexion');
-		//gsession_destroy();
 		if($this->session->has_userdata('nom')) { //Si une session existe alors renvoie au menu
 			redirect('MenuPrincipal');
 		}
@@ -18,6 +17,7 @@ class Accueil extends CI_Controller
 
 	public function index()
 	{
+
 		$this->homePage();
 	}
 	function homePage() //affiche la page d'accueil
@@ -50,25 +50,28 @@ class Accueil extends CI_Controller
 	 		$data['email'] = $this->input->post('email');
 	 		$data['password'] = $this->input->post('password');
 			$data_result=$this->Model_connexion->login($data);
-	 		if ($data_result!= false){
-	 				$session_data = array(
+	 		if ($data_result){
+	 			session_start();
+	 			$session_data = array(
 						'email' => $data_result['email'],
 						'name' => $data_result['name'],
 						'firstname' => $data_result['firstname'],
 						'logged'=> true
 	 				);
-	 				if($this->input->post('staylogged')!=null ){
+	 				/*if($this->input->post('staylogged')!=null ){
 						$this->config->sess_expiration= 5;
 
-					}
+					}*/
 	 				$this->session->set_userdata($session_data);
-	 				sleep(1); //anti force brute
+				sleep(1); //anti force brute
 	 				redirect(MenuPrincipal);
 
 	 			} else {
 	 				$this->load->view('template/View_template');
 	 				echo "erreur login";
-	 			//	$this->load->view('errors/View_login_error');
+				$this->load->view('View_connexion');
+
+				//	$this->load->view('errors/View_login_error');
 	 			}
 
 	 	} else {

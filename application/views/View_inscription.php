@@ -9,8 +9,8 @@
 <nav class="navbar navbar-expand-sm">
   <ul class="navbar-nav">
     <li class="nav-item active">
-      <a href="">
-        <img src="<?php echo base_url()?>/images/icon-home.png" style="width:50%">
+      <a href="<?php echo base_url()?>">
+        <img src="<?php echo base_url()?>images/icon-home.png" style="width:50%">
       </a>
     </li>
   </ul>
@@ -23,7 +23,7 @@
           </li>
           <li class="nav-item">
             <a href="">
-              <img src="<?php echo base_url()?>/images/icon-info.png" alt="logo" style="width:75%" >
+              <img src="<?php echo base_url()?>images/icon-info.png" alt="logo" style="width:75%" >
             </a>
           </li>
         </ul>
@@ -40,7 +40,7 @@
 
         <!-- Logo -->
         <div class="text-center">
-          <img src="<?php echo base_url()?>/images/logo.png" alt="logo" style="width:20%" unselectable="on">
+          <img src="<?php echo base_url()?>images/logo.png" alt="logo" style="width:20%" unselectable="on">
         </div>
 
         <br>
@@ -49,27 +49,32 @@
         <div class="form-group">
 			<?php echo form_open();
 			echo form_input(['type'=>'text',
-								'class'=> 'form-control',
+								'class'=> 'form-control my-3 mx-auto',
+					'style'=>'width:50%',
 								'placeholder'=>'Prénom',
 								'name'=>'firstname']);
 
 			echo form_input(['type'=>'text',
-								'class'=> 'form-control',
+								'class'=> 'form-control my-3 mx-auto',
+					'style'=>'width:50%',
 								'placeholder'=>'Nom',
 								'name'=>'name']);
 
 			echo form_input(['type'=>'email',
-								'class'=> 'form-control',
+								'class'=> 'form-control my-3 mx-auto',
+					'style'=>'width:50%',
 								'placeholder'=>'Adresse email',
 								'name'=>'email']);
 
 			echo form_input(['type'=>'password',
-								'class'=> 'form-control',
+								'class'=> 'form-control my-3 mx-auto',
+					'style'=>'width:50%',
 								'placeholder'=>'Mot de passe',
 								'name'=>'password']);
 			echo form_input(['type'=>'password',
-								'class'=> 'form-control',
-								'placeholder'=>'Confirmez votre mot de passe',
+								'class'=> 'form-control my-3 mx-auto',
+					'style'=>'width:50%',
+								'placeholder'=>'Confirmez mot de passe',
 								'name'=>'password_confirm']);
           ?>
         <br>

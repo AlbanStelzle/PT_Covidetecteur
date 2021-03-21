@@ -12,8 +12,8 @@ $this->load->helper('form');
 <nav class="navbar navbar-expand-sm">
   <ul class="navbar-nav">
     <li class="nav-item active">
-      <a href="">
-        <img src="<?php echo base_url()?>/images/icon-home.png" style="width:50%">
+      <a href="<?php echo base_url()?>">
+        <img src="<?php echo base_url()?>images/icon-home.png" style="width:50%">
       </a>
     </li>
   </ul>
@@ -56,12 +56,15 @@ $this->load->helper('form');
 
           echo form_input(['type'=>'email',
                             'placeholder'=>'Adresse email',
-                            'class'=>'form-control',
-                            'name'=>'email']);
+                            'class'=>'form-control my-3 mx-auto',
+				  'style'=> 'width:50%',
+
+				  'name'=>'email']);
 
           echo form_input(['type'=>'password',
               'placeholder'=>'Mot de passe',
-              'class'=>'form-control',
+              'class'=>'form-control my-3 mx-auto',
+              'style'=> 'width:50%',
               'name'=>'password']);
 
 
@@ -69,7 +72,9 @@ $this->load->helper('form');
 
           echo "<div class=\"text-center\">";
 
-		  echo "Rester connecté ".form_checkbox('staylogged','true');
+		  echo "Rester connecté ".form_checkbox([
+		  		'data'=>'staylogged',
+						  'value'=>'true','class'=>'my-3']);
 		  echo "<br>";
           echo form_submit(['type'=>'submit',
                             'class'=>'btn btn-success rounded-pill',
