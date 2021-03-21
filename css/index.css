@@ -24,6 +24,10 @@ footer
 	text-align: center;
 }
 
+.hov:hover {
+  opacity: 0.5;
+}
+
 /*//////////////////////////////////////////////////////////////////
 [ Logo et Titre]*/
 .text-center img
