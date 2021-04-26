@@ -66,7 +66,7 @@ $this->load->helper('html');?>
           <h4>Mentions légales</h4>
           <p>Par RAYMOND Enveric, STELZLE Alban, BOUCHENY Nicolas, DESCROIX Hugo Sous la direction de VALARCHER Pierre</p>
           <p>Crée le : 10/11/2020 Dernière mise à jour : 18/01/2021<br>Tous droits réservés ©</p>
-          <img src="images/logo-upec-iut.png" class="logo-upec-iut">
+          <img src="images/logo-upec-iut.png" class="logo-upec-iut" onClick="location.href='https://www.iut-fbleau.fr/'">
         </div>
       </div>
     </div>
