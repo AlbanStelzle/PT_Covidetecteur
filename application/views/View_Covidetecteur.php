@@ -59,11 +59,18 @@ $this->load->helper('html');?>
 </div>
 
 <footer>
-    <br>
-    <h2>Mentions légales</h2>
-    <p>Par RAYMOND Enveric,&nbsp;STELZLE Alban,&nbsp;BOUCHENY Nicolas,&nbsp;DESCROIX Hugo &nbsp;&nbsp; Sous la direction de VALARCHER Pierre</p>
-    <p>Crée le : 10/11/2020 &nbsp;&nbsp;Dernière mise à jour : 18/01/2021<br>Tous droits réservés ©</p>
-    <!--<a href="https://www.iut-fbleau.fr/" target="_blanck"><img src="././images/upec.png"></a>-->
+  <div class="container" style="width:80%">
+    <div class="card border-0 shadow my-4">
+      <div class="card-body p-3">
+        <div class="text-center">
+          <h4>Mentions légales</h4>
+          <p>Par RAYMOND Enveric, STELZLE Alban, BOUCHENY Nicolas, DESCROIX Hugo Sous la direction de VALARCHER Pierre</p>
+          <p>Crée le : 10/11/2020 Dernière mise à jour : 18/01/2021<br>Tous droits réservés ©</p>
+          <img src="images/logo-upec-iut.png" class="logo-upec-iut">
+        </div>
+      </div>
+    </div>
+  </div>
 </footer>
 </body>
 </html>
