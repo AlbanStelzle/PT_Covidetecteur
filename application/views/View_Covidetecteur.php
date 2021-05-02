@@ -18,13 +18,13 @@ $this->load->helper('html');?>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-                <a class="nav-link text-white" target="_top" href="mailto:your@email.address?subject=">Contact
+                <a class="nav-link text-white hov" target="_top" href="mailto:your@email.address?subject=">Contact
                     <span class="sr-only">(current)</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="">
-                    <img src="<?php echo base_url()?>images/icon-info.png" alt="logo" style="width:75%" >
+                    <img class="hov" src="<?php echo base_url()?>images/icon-info.png" alt="logo" style="width:75%" >
                 </a>
             </li>
         </ul>
@@ -32,7 +32,7 @@ $this->load->helper('html');?>
 </nav>
 
 <!-- LOGO -->
-<div class="text-center">
+<div class="logo-nom-site">
     <img src="<?php echo base_url()?>images/logo.png" alt="logo">
     <h1>Le Covidétecteur</h1>
 </div>
@@ -42,20 +42,18 @@ $this->load->helper('html');?>
 
 <!-- SE CONNECTER -->
 <div class="connexion">
-    <?php
-    echo anchor('Accueil/login',img('images/bouton-connexion.png'));
-    ?>
+    <div class="hov-soft">
+        <?php echo anchor('Accueil/login',img('images/bouton-connexion.png'));?>
+    </div>
 </div>
 
 <br>
 
 <!-- S'INSCRIRE -->
 <div class="inscription">
-    <?php
-
-    echo anchor('Accueil/register', 	img('images/bouton-inscription.png'));
-    ?>
-
+    <div class="hov-soft">
+        <?php echo anchor('Accueil/register', 	img('images/bouton-inscription.png'));?>
+    </div>
 </div>
 
 <footer>
@@ -65,8 +63,8 @@ $this->load->helper('html');?>
         <div class="text-center">
           <h4>Mentions légales</h4>
           <p>Par RAYMOND Enveric, STELZLE Alban, BOUCHENY Nicolas, DESCROIX Hugo Sous la direction de VALARCHER Pierre</p>
-          <p>Crée le : 10/11/2020 Dernière mise à jour : 18/01/2021<br>Tous droits réservés ©</p>
-          <img src="images/logo-upec-iut.png" class="logo-upec-iut" onClick="location.href='https://www.iut-fbleau.fr/'">
+          <p>Crée le : 10/11/2020 Dernière mise à jour : 02/05/2021<br>Tous droits réservés ©</p>
+          <img class="hov" src="<?php echo base_url()?>images/logo-upec-iut.png" class="logo-upec-iut" onClick="location.href='https://www.iut-fbleau.fr/'">
         </div>
       </div>
     </div>
