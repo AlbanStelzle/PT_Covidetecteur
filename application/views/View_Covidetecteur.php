@@ -19,7 +19,7 @@ $this->load->helper('html');?>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
             	<a class="nav-link text-white hov" target="_top" href = "mailto: le.covidetecteur@gmail.com">Contact
-    				<span class="sr-only">(current)</span>
+                 	<span class="sr-only">(current)</span>
 				</a>
             </li>
             <li class="nav-item">
