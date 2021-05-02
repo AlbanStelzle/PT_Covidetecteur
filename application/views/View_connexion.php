@@ -62,7 +62,7 @@ $this->load->helper('form');
     <div class="card border-0 shadow my-4">
       <div class="card-body p-3">
         <div class="text-center">
-          <h1 class="font-weight-light">Inscription</h1>
+          <h1 class="font-weight-light">Connexion</h1>
         </div>
 
         <!-- Logo -->
