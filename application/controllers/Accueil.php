@@ -86,6 +86,12 @@ class Accueil extends CI_Controller
 	 		}
 	 	}
 	}
+  
+  	public function confirmation() //Affiche la page de confirmation
+	{
+		$this->load->view('template/View_template');
+		$this->load->view('View_confirmation');
+	}
 
 	public function register() //Affiche la page d'inscription
 	{
