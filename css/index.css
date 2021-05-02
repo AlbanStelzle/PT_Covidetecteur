@@ -70,6 +70,7 @@ footer
 	width: 24%;
 }
 
+
 /*//////////////////////////////////////////////////////////////////
 [ Footer ]*/
 footer img
@@ -78,3 +79,24 @@ footer img
 	padding-bottom: 10px;
 }
 
+
+
+/*//////////////////////////////////////////////////////////////////
+[ page confirmation ]*/
+
+.button-center
+{
+	margin-top: 5%;
+	text-align: center;
+}
+
+.confirmation-text
+{
+	margin-top: 7%;
+	color: white;
+}
+
+.logo-confirmation
+{
+	width: 10%;
+}
