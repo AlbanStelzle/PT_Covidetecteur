@@ -19,6 +19,7 @@ class MenuPrincipal extends CI_Controller
 	{
 		$detecteur = $this->Model_detector->getAllDetector($this->session->email);
 		$this->load->view('template/View_template');
+		//$this->load->view('View_ajout_appareil');
 		$this->load->view('View_menu',$detecteur);
 		}
 	public function add_detector(){
@@ -35,19 +36,23 @@ class MenuPrincipal extends CI_Controller
 			$data['name'] = $this->input->post('name');
 			$data['id'] = $this->input->post('id');
 			$data['email']=$this->session->email;
+			$this->Model_detector->addDetector($data);
+			redirect('MenuPrincipal');
 		}else {
 			if($this->form_validation->error_array() == null){
 				$this->load->view('template/View_template');
-				$this->load->view('View_inscription');
+				$this->load->view('View_ajout_appareil');
 			}else{
 				$this->load->view('template/View_template');
-
-				//$this->load->view('errors/View_inscription_error');
+				$this->load->view('errors/View_ajout_appareil');
 
 			}
 
 		}
 
 	}
-
+	public function delete($key){
+		$this->Model_detector->delete($key);
+		redirect('MenuPrincipal','refresh');
+	}
 }

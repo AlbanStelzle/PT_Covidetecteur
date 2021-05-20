@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <body>
 
   <!-- Navigation -->
@@ -8,7 +7,7 @@
     <ul class="navbar-nav">
       <li class="nav-item active">
         <a class="hoov" href="">
-         <img src="<?php echo base_url()?>/images/icon-home.png" style="width:50%">
+         <img src="<?php echo base_url()?>images/icon-home.png" style="width:50%">
        </a>
        <li>
         <h2 class="text-white" style="margin-top: 10px;">MES APPAREILS ></h2>
@@ -45,6 +44,7 @@
 		  <?php
 			//print_r($detecteur);
 		  $i = 0;
+		  if(isset($detecteur)){
 		  foreach($detecteur as $key){
 
 		  	if( $i == 0) {
@@ -54,15 +54,26 @@
 				  <div class="card-body p-3" id="">
 
 					  <div class="text-center" >
-						  <h5>Emplacement: '.$key["name"].' </h5>
+						  <h5>'.$key["name"].' </h5>
 						  ';
-		  	if($key["lastdata"] > 300){
+		  	  	if($key["lastdata"] == null){
+					echo '<div class="alert alert-primary" role="alert">Aucune donnée n\'est présente.</div>';
+				}else if($key["lastdata"]>800 && $key["lastdata"] < 1500){
+					echo '<div class="alert alert-warning" role="alert">
+  La qualité de l\'air est moyenne. La concentration de CO2 est de '.$key["lastdata"].' PPM. Il est préférable d\'aérer la pièce.
+</div>';
+				}else if($key["lastdata"] > 1500){
 		  		echo '<div class="alert alert-danger" role="alert">
-  Seuil de CO2 dépassé ('.$key["lastdata"].'). Il est préférable d\'aérer la pièce.
+  La qualité de l\'air est très mauvaise. La concentration de CO2 est de '.$key["lastdata"].' PPM. Il est urgent d\'aérer la pièce.
+</div>';
+			}else if($key["lastdata"] <800){
+				echo '<div class="alert alert-success" role="alert">
+  La qualité de l\'air est bonne. La concentration de CO2 est de '.$key["lastdata"].' PPM.
 </div>';
 			}
 						echo '
 						  <button class="btn btn-primary" onclick="location.href =\'MenuPrincipal/info/'.$key["id"].'\'">Voir les statistiques globales</button>
+						  <button class="btn btn-danger" style="margin-top:2%" onclick="location.href =\'MenuPrincipal/delete/'.$key["id"].'\'">Supprimer ce capteur</button>
 					  </div>
 
 				  </div>
@@ -73,12 +84,13 @@
 			}
 		  	$i++;
 		  }
+		  }
 		  ?>
           <div class="card border-0 shadow my-2 mx-2" style="height: 250px;">
             <div class="card-body p-3" id="white_card_1_1">
 
             <div class="text-center" >
-              <a class="hoov">
+              <a class="hoov" href="MenuPrincipal/add_detector">
                 <img src="<?php echo base_url()?>/images/icon-cross.png" alt="logo" style="width:25%" >
               </a>
             </div>

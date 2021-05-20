@@ -31,4 +31,11 @@ class Model_detector extends CI_Model
 		//return $array;
 
 	}
+	public function delete($key){
+		$this->db->where('id',$key);
+		$this->db->delete('PT_list_detector');
+	}
+	public function addDetector($data){
+		$this->db->insert('PT_list_detector',$data);
+	}
 }

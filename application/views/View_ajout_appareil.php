@@ -3,11 +3,9 @@
 
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/inscription.css">
 <title>Le Covidétecteur</title>
 
-<link rel="icon" href="images/logo2.png">
+<link rel="icon" href="<?php echo base_url()?>images/logo2.png">
 
 </head>
 
@@ -18,7 +16,7 @@
     <ul class="navbar-nav">
       <li class="nav-item active">
         <a href="">
-          <img src="images/icon-home.png" style="width:50%"> 
+          <img src="<?php echo base_url()?>images/icon-home.png" style="width:50%">
         </a>
       </li>
     </ul>
@@ -31,7 +29,7 @@
         </li>
         <li class="nav-item">
           <a href="">
-            <img src="images/icon-info.png" alt="logo" style="width:75%" > 
+            <img src="<?php echo base_url()?>images/icon-info.png" alt="logo" style="width:75%" >
           </a>
         </li>
       </ul>
@@ -60,23 +58,29 @@
         <br>
 
         <!-- Form -->
-
+		<?php echo form_open(); ?>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text">
-              <img src="images/icon-tag.png" class="img-responsive" alt="Responsive image" width="24" height="24" />
+              <img src="<?php echo base_url()?>images/icon-tag.png" class="img-responsive" alt="Responsive image" width="24" height="24" />
              </span>
           </div>
-          <input type="text" class="form-control" placeholder="Choisissez un nom">
+			<?php echo form_input(['type'=>'text',
+									'class'=>'form-control',
+									'placeholder'=>'Choisissez un nom',
+									'name'=>'name'])?>
         </div>
 
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text">
-              <img src="images/icon-code.png" class="img-responsive" alt="Responsive image" width="24" height="24" />
+              <img src="<?php echo base_url()?>images/icon-code.png" class="img-responsive" alt="Responsive image" width="24" height="24" />
             </span>
           </div>
-          <input type="text" class="form-control" placeholder="Entrez le code présent sous l’appareil">
+			<?php echo form_input(['type'=>'text',
+					'class'=>'form-control',
+					'placeholder'=>'Entrez le code présent sous l’appareil',
+					'name'=>'id'])?>
         </div>
 
         <br>
@@ -91,7 +95,7 @@
             <div class="col">
               <div class="text-center">
                 <a href="" >
-                  <img src="images/icon-croix.png" alt="logo" style="width:20%" > 
+                  <img src="<?php echo base_url()?>images/icon-croix.png" alt="logo" style="width:20%" >
                 </a>
               </div>
             </div>
@@ -100,9 +104,15 @@
             <div class="col"><H4 class="text-center">Ajouter</H4></div>
               <div class="col">
                 <div class="text-center">
-                  <a href="" class="text-center">
-                    <img src="images/icon-check.png" alt="logo" style="width:20%" > 
-                  </a>
+
+					<?php echo form_submit(['type'=>'submit',
+							'class'=>'btn btn-success rounded-pill',
+							'style'=>'width:50%',
+					],"Ajouter");?>
+					<!--  <a href="" class="text-center">
+
+                    <img src="<?php echo base_url()?>images/icon-check.png" alt="logo" style="width:20%" >
+                  </a>-->
                 </div>
               </div>
             </div>
@@ -110,7 +120,9 @@
             <br>
 
           </div>
-        </div>
+		<?php echo form_close(); ?>
+
+	</div>
       </div>
     </div>
   </div>
