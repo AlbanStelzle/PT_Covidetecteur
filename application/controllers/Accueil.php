@@ -44,8 +44,7 @@ class Accueil extends CI_Controller
 
 	 	$this->form_validation->set_rules('email', 'Email', 'valid_email|required|callback_validate_email');
 		$this->form_validation->set_rules('password', 'Mot de passe', 'required|alpha_numeric');
-	 	$this->form_validation->set_message('validate_email', '{field} existe pas dans la base.');
-
+	 	$this->form_validation->set_message('validate_email', 'L\'adresse mail n\'existe pas est incorrecte.');
 	 	if ($this->form_validation->run()) {
 	 		$data['email'] = $this->input->post('email');
 	 		$data['password'] = $this->input->post('password');
@@ -68,11 +67,9 @@ class Accueil extends CI_Controller
 
 	 			} else {
 	 				$this->load->view('template/View_template');
-	 				echo "erreur login";
-				$this->load->view('View_connexion');
+					$this->load->view('errors/View_connexion');
 
-				//	$this->load->view('errors/View_login_error');
-	 			}
+			}
 
 	 	} else {
 	 		if ($this->form_validation->error_array() == null) {
@@ -80,8 +77,7 @@ class Accueil extends CI_Controller
 	 			$this->load->view('View_connexion');
 	 		} else {
 	 			$this->load->view('template/View_template');
-	 			echo "erreur";
-				$this->load->view('View_connexion');
+				$this->load->view('errors/View_connexion');
 
 	 		}
 	 	}
@@ -96,14 +92,15 @@ class Accueil extends CI_Controller
 	public function register() //Affiche la page d'inscription
 	{
 
-
 		$this->form_validation->set_rules('firstname', 'firstname', 'required|alpha_numeric_spaces');
 		$this->form_validation->set_rules('name', 'name', 'required|alpha_numeric_spaces');
 		$this->form_validation->set_rules('email', 'Email', 'valid_email|required|is_unique[PT_user.email]');
 		$this->form_validation->set_rules('password', 'Mot de passe', 'required|alpha_numeric|min_length[8]');
-		$this->form_validation->set_rules('password_confirm', 'Mot de passe de confirmation', 'required|alpha_numeric|matches[password]');
+		$this->form_validation->set_rules('password_confirm', 'Mot de passe de confirmation', 'required|alpha_numeric|matches[password]|min_length[8]');
 
 		$this->form_validation->set_message('is_unique', '{field} est déjà présent dans la base.');
+		$this->form_validation->set_message('matches', 'Les mots de passes doivent être les mêmes.');
+		$this->form_validation->set_message('min_length', 'Les mots de passes doivent avoir au minimum 8 caractères.');
 
 
 		if ($this->form_validation->run()) {
@@ -126,8 +123,7 @@ class Accueil extends CI_Controller
 				$this->load->view('View_inscription');
 			}else{
 				$this->load->view('template/View_template');
-
-				//$this->load->view('errors/View_inscription_error');
+				$this->load->view('errors/View_inscription');
 
 			}
 

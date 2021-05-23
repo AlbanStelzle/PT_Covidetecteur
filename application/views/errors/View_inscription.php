@@ -1,3 +1,25 @@
+<?php
+$mail=$_POST['email'] ?? "";
+$nom=$_POST['name'] ?? "";
+$prenom=$_POST['firstname'] ?? "";
+if(form_error('email')==null){
+	$validation_mail= "is-valid";
+}else{
+	$validation_mail ="is-invalid";
+}
+if(form_error('name')==null){
+	$validation_name= "is-valid";
+}else{
+	$validation_name ="is-invalid";
+}
+if(form_error('firstname')==null){
+	$validation_firstname= "is-valid";
+}else{
+	$validation_firstname ="is-invalid";
+}
+
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -72,31 +94,38 @@
         <div class="form-group">
 			<?php echo form_open();
 			echo form_input(['type'=>'text',
-								'class'=> 'form-control my-3 mx-auto',
+					'value'=>$prenom,
+
+					'class'=> "form-control my-3 mx-auto $validation_firstname",
 					'style'=>'width:50%',
 								'placeholder'=>'Prénom',
 								'name'=>'firstname']);
 
 			echo form_input(['type'=>'text',
-								'class'=> 'form-control my-3 mx-auto',
-					'style'=>'width:50%',
+					'value'=>$nom,
+
+					'class'=> "form-control my-3 mx-auto $validation_name",
+								'style'=>'width:50%',
 								'placeholder'=>'Nom',
 								'name'=>'name']);
 
 			echo form_input(['type'=>'email',
-								'class'=> 'form-control my-3 mx-auto',
+					'value'=>$mail,
+
+					'class'=> "form-control my-3 mx-auto  $validation_mail",
 					'style'=>'width:50%',
 								'placeholder'=>'Adresse email',
 								'name'=>'email']);
 
-			echo form_password(['class'=> 'form-control my-3 mx-auto',
-								'style'=>'width:50%',
-								'placeholder'=>'Mot de passe',
-								'name'=>'password']);
-			echo form_password(['class'=> 'form-control my-3 mx-auto',
-								'style'=>'width:50%',
-								'placeholder'=>'Confirmez mot de passe',
-								'name'=>'password_confirm']);
+			echo form_password(['class'=> "form-control my-3 mx-auto is-invalid",
+					'style'=>'width:50%',
+					'placeholder'=>'Mot de passe',
+					'name'=>'password']);
+			echo form_password(['class'=> "form-control my-3 mx-auto is-invalid",
+					'style'=>'width:50%',
+					'placeholder'=>'Confirmez mot de passe',
+					'name'=>'password_confirm']);
+			echo form_error('password_confirm','<div class="alert alert-danger mx-auto" style="width:50%">','</div>');
 
 			?>
         <br>

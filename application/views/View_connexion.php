@@ -1,5 +1,6 @@
 <?php
 $this->load->helper('form');
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -85,8 +86,7 @@ $this->load->helper('form');
 
 				  'name'=>'email']);
 
-          echo form_input(['type'=>'password',
-              'placeholder'=>'Mot de passe',
+          echo form_password(['placeholder'=>'Mot de passe',
               'class'=>'form-control my-3 mx-auto',
               'style'=> 'width:50%',
               'name'=>'password']);
