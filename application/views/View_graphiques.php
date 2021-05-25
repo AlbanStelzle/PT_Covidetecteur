@@ -24,7 +24,6 @@ $this->load->helper('html');?>
 <script type="text/javascript" src="../../js/co2.js"></script>
 <script type="text/javascript" src="../../js/temperature.js"></script>
 <script type="text/javascript" src="../../js/humidite.js"></script>
-<script type="text/javascript" src="../../js/animation.js"></script>
 
 
   
@@ -65,9 +64,9 @@ $this->load->helper('html');?>
         </button>
       </div>
       <div class="modal-body">
-        <p><b>Ce site va vous permettre de connecter votre capteur Covidétecteur afin de visualiser ses données.</b></p>
-        <p>Le Covidétecteur est un appareil capable de détecter et d'alerter sur la présence potentielle de charge virale dans l’air d’un lieu clos.</p>
-        <p>Le Covidétecteur est équipé d'un capteur Sensirion SCD30 utilisant la technologie CMOSens® pour la détection infrarouge qui permet la mesure extrêmement précise de dioxyde de carbone. Outre la technologie de mesure NDIR pour la détection du CO2, un capteur d'humidité et de température Sensirion de qualité supérieure est également intégré sur le même module capteur.</p>
+        <p><b>Comment analyser les données du capteur ?</b></p>
+        <p>Sur cette page cliquez sur les boutons CO2, Humidité ou Température pour avoir accès à l'historique de votre Covidétecteur.</p>
+        <p>Vous allez pouvoir par exemple vérifier à quels moments les données ont dépassé les limites de dangerosité.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
@@ -93,13 +92,13 @@ $this->load->helper('html');?>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <button type="button" class="btn btn-primary m-1" id="co2">co2</button>
+          <button type="button" class="btn btn-primary m-1" id="co2">CO2</button>
         </li>
         <li class="nav-item">
-          <button type="button" class="btn btn-primary m-1" id="humidite">humidite</button>
+          <button type="button" class="btn btn-primary m-1" id="humidite">Humidité</button>
         </li>
         <li class="nav-item">
-         <button type="button" class="btn btn-primary m-1" id="temperature">temperature</button>
+         <button type="button" class="btn btn-primary m-1" id="temperature">Temperature</button>
         </li>
 
       </ul>
@@ -107,12 +106,17 @@ $this->load->helper('html');?>
   </div>
 </nav>
 
-        <div id="chart"></div>
+<!-- zone d'affichage des graphiques -->
+<div id="chart"></div>
 
-
-<p id="demo"></p>
 
 <script>
+// modal (pop-up) automatique
+$(window).on('load', function() {
+        $('#exampleModalCenter').modal('show');
+    });
+
+//affiche les graphiques
 document.getElementById('chart').innerHTML = '<div id="chart_co2"></div>';
 
 document.getElementById("co2").addEventListener("click", displayCo2);
@@ -148,17 +152,6 @@ function displayTemperature() {
       head.appendChild(script);
 }
 </script>
-
-
-
-
-
-
-
-
-
-
-
 
 
     </div>
