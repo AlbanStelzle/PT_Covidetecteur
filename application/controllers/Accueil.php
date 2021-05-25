@@ -89,7 +89,7 @@ class Accueil extends CI_Controller
 		$this->load->view('View_confirmation');
 	}
   
-  	public function graphiques() //Affiche la page de confirmation
+  	public function graphiques() //Affiche la page des graphiques
 	{
 		$this->load->view('template/View_template');
 		$this->load->view('View_graphiques');
