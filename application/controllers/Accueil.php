@@ -88,6 +88,12 @@ class Accueil extends CI_Controller
 		$this->load->view('template/View_template');
 		$this->load->view('View_confirmation');
 	}
+  
+  	public function graphiques() //Affiche la page de confirmation
+	{
+		$this->load->view('template/View_template');
+		$this->load->view('View_graphiques');
+	}
 
 	public function register() //Affiche la page d'inscription
 	{
