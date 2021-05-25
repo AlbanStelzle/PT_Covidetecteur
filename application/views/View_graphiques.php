@@ -7,7 +7,7 @@ $this->load->helper('html');?>
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="../../css/a.css">
+<link rel="stylesheet" href="../../css/graphiques.css">
 <link rel="stylesheet" href="../../css/inscription.css">
 
 <title>Le Covidétecteur</title>
