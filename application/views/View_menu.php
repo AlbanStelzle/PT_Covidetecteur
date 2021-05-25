@@ -72,8 +72,10 @@
 </div>';
 			}
 						echo '
-						  <button class="btn btn-primary" onclick="location.href =\'MenuPrincipal/info/'.$key["id"].'\'">Voir les statistiques globales</button>
-						  <button class="btn btn-danger" style="margin-top:2%" onclick="location.href =\'MenuPrincipal/delete/'.$key["id"].'\'">Supprimer ce capteur</button>
+						  <button class="btn btn-primary btn-sm">';
+              echo anchor('Accueil/graphiques','Voir les statistiques globales','class="btn btn-primary btn-sm"');
+              echo '</button>';
+						  echo '<button class="btn btn-danger" style="margin-top:2%" onclick="location.href =\'MenuPrincipal/delete/'.$key["id"].'\'">Supprimer ce capteur</button>
 					  </div>
 
 				  </div>
