@@ -65,7 +65,7 @@ $this->load->helper('html');?>
       </div>
       <div class="modal-body">
         <p><b>Comment analyser les données du capteur ?</b></p>
-        <p>Sur cette page cliquez sur les boutons CO2, Humidité ou Température pour avoir accès à l'historique de votre Covidétecteur.</p>
+        Sur cette page cliquez sur les boutons <kbd class="bg-primary">CO2</kbd>, <kbd class="bg-primary">Humidité</kbd> ou <kbd class="bg-primary">Température</kbd> pour avoir accès à l'historique de votre Covidétecteur.</p>
         <p>Vous allez pouvoir par exemple vérifier à quels moments les données ont dépassé les limites de dangerosité.</p>
       </div>
       <div class="modal-footer">
