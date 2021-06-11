@@ -15,7 +15,7 @@
   <nav class="navbar navbar-expand-sm">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a href="">
+        <a href="MenuPrincipal">
           <img src="<?php echo base_url()?>images/icon-home.png" style="width:50%">
         </a>
       </li>

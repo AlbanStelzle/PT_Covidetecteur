@@ -19,7 +19,6 @@ class MenuPrincipal extends CI_Controller
 	{
 		$detecteur = $this->Model_detector->getAllDetector($this->session->email);
 		$this->load->view('template/View_template');
-		//$this->load->view('View_ajout_appareil');
 		$this->load->view('View_menu',$detecteur);
 		}
 	public function add_detector(){
@@ -37,22 +36,26 @@ class MenuPrincipal extends CI_Controller
 			$data['id'] = $this->input->post('id');
 			$data['email']=$this->session->email;
 			$this->Model_detector->addDetector($data);
-			redirect('MenuPrincipal');
+			redirect();
 		}else {
 			if($this->form_validation->error_array() == null){
 				$this->load->view('template/View_template');
 				$this->load->view('View_ajout_appareil');
 			}else{
 				$this->load->view('template/View_template');
-				$this->load->view('errors/View_ajout_appareil');
+
+				//$this->load->view('errors/View_inscription_error');
 
 			}
 
 		}
 
 	}
-	public function delete($key){
-		$this->Model_detector->delete($key);
-		redirect('MenuPrincipal','refresh');
+	public function Graph($id) //Affiche la page des graphiques
+	{
+		$data = $this->Model_detector->getDetectorData($id);
+		$this->load->view('template/View_template');
+		$this->load->view('View_graphiques',$data);
 	}
+
 }

@@ -6,13 +6,10 @@ $this->load->helper('html');?>
 
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="../../css/graphiques.css">
-<link rel="stylesheet" href="../../css/inscription.css">
+<link rel="stylesheet" href="<?php echo base_url()?>css/graphiques.css">
+<link rel="stylesheet" href="<?php echo base_url()?>css/inscription.css">
 
-<title>Le Covidétecteur</title>
 
-<link rel="icon" href="images/logo2.png">
 
 </head>
 
@@ -21,12 +18,9 @@ $this->load->helper('html');?>
 <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
-<script type="text/javascript" src="../../js/co2.js"></script>
-<script type="text/javascript" src="../../js/temperature.js"></script>
-<script type="text/javascript" src="../../js/humidite.js"></script>
 
+<link rel="icon" href="images/logo2.png">
 
-  
 <!-- Navigation -->
 <nav class="navbar navbar-expand-sm">
     <ul class="navbar-nav">
@@ -105,13 +99,13 @@ $this->load->helper('html');?>
     </div>
   </div>
 </nav>
-
 <!-- zone d'affichage des graphiques -->
 <div id="chart"></div>
-
-
+<?php $data = json_encode($detecteur)?>
 <script>
 // modal (pop-up) automatique
+let dataco2= <?php print_r($data);?>;
+
 $(window).on('load', function() {
         $('#exampleModalCenter').modal('show');
     });
@@ -126,7 +120,7 @@ function displayCo2() {
   //recharge le js
    var head= document.getElementsByTagName('head')[0];
       var script= document.createElement('script');
-      script.src= '../../js/co2.js';
+      script.src= '<?php echo base_url()?>js/co2.js';
       head.appendChild(script);
 }
 
@@ -137,7 +131,7 @@ function displayHumidite() {
   //recharge le js
    var head= document.getElementsByTagName('head')[0];
       var script= document.createElement('script');
-      script.src= '../../js/humidite.js';
+      script.src= '<?php echo base_url()?>js/humidite.js';
       head.appendChild(script);
 }
 
@@ -145,12 +139,13 @@ document.getElementById("temperature").addEventListener("click", displayTemperat
 
 function displayTemperature() {
   document.getElementById('chart').innerHTML = '<div id="chart_temperature"></div>';
-  //recharge le js
-   var head= document.getElementsByTagName('head')[0];
-      var script= document.createElement('script');
-      script.src= '../../js/temperature.js';
-      head.appendChild(script);
+	  //recharge le js
+	   var head= document.getElementsByTagName('head')[0];
+		  var script= document.createElement('script');
+		  script.src= '<?php echo base_url()?>js/temperature.js';
+		  head.appendChild(script);
 }
+
 </script>
 
 
@@ -162,6 +157,9 @@ function displayTemperature() {
       </div>
     </div>
   </div>
+<script type="text/javascript" src="<?php echo base_url()?>js/co2.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>js/temperature.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>js/humidite.js"></script>
 
 </body>
 </html>

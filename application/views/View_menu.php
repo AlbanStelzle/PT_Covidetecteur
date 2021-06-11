@@ -73,7 +73,7 @@
 			}
 						echo '
 						  <button class="btn btn-primary btn-sm mr-1">';
-              echo anchor('Accueil/graphiques','Voir les statistiques globales','class="btn btn-primary btn-sm"');
+              echo anchor('MenuPrincipal/Graph/'.$key["id"],'Voir les statistiques globales','class="btn btn-primary btn-sm"');
               echo '</button>';
 						  echo '<button class="btn btn-danger mb-2 ml-1" style="margin-top:2%" onclick="location.href =\'MenuPrincipal/delete/'.$key["id"].'\'">Supprimer ce capteur</button>
 					  </div>
@@ -92,7 +92,7 @@
             <div class="card-body p-3" id="white_card_1_1">
 
             <div class="text-center" >
-              <a class="hoov" href="MenuPrincipal/add_detector">
+              <a class="hoov" href="./add_detector">
                 <img src="<?php echo base_url()?>/images/icon-cross.png" alt="logo" style="width:25%" >
               </a>
             </div>

@@ -15,7 +15,7 @@ am4core.useTheme(am4themes_animated);
 // Themes end
 
 var chart = am4core.create("chart_co2", am4charts.XYChart);
-
+/*
 chart.data = [{
   "year": "1994",
   "CO2": 1587,
@@ -97,16 +97,61 @@ chart.data = [{
   "CO2": 359,
   "800ppm": 800
 }];
+*/
 
-chart.dateFormatter.inputDateFormat = "yyyy-mm-dd";
+chart.data = [];
+let data = [];
+for(let i = 0; i < dataco2.length ; i++){
+	if(i!= dataco2.length-1) {
+
+		let min = (new Date(dataco2[i + 1].date).getTime() - new Date(dataco2[i].date).getTime()) / (1000*60);
+		if (min > 20) {
+			let nbskip = min / 10;
+			for (let y = 0; y < nbskip; y++) {
+				let date = new Date(dataco2[i].date)
+				date.setMinutes(date.getMinutes() + y * 10);
+				
+				let value = {
+					"PPM": 0,
+					"date": date,
+					"limit": 800
+				}
+				data.push(value);
+
+			}
+		} else {
+			let value = {
+				"PPM": dataco2[i].PPM,
+				"date": dataco2[i].date,
+				limit: 800
+			}
+			data.push(value);
+
+		}
+	}else{
+		let value = {
+			"PPM": dataco2[i].PPM,
+			"date": dataco2[i].date,
+			limit: 800
+		}
+		data.push(value);
+
+	}
+
+}
+chart.data = data;
+console.log(chart.data);
+
+chart.dateFormatter.inputDateFormat = "dd-mm-yyyy HH:mm:ss";
 var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
 dateAxis.renderer.minGridDistance = 60;
 dateAxis.startLocation = 0.5;
 dateAxis.endLocation = 0.5;
 dateAxis.baseInterval = {
-  timeUnit: "day",
-  count: 1
+  timeUnit: "minute",
+  count: 10
 }
+
 
 var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
 valueAxis.tooltip.disabled = true;
@@ -114,11 +159,11 @@ valueAxis.tooltip.disabled = true;
 
 /* == COURBE BLEU VALEURS CO2 == */
 var series = chart.series.push(new am4charts.LineSeries());
-series.dataFields.dateX = "year";
+series.dataFields.dateX = "date";
 series.name = "CO2 de la pièce en PPM";
-series.dataFields.valueY = "CO2";
-series.tooltipHTML = "<img src='../../images/CO2.png' style='vertical-align:bottom; margin-right: 10px; width:35px; height:28px;'><span style='font-size:14px; color:#000000;'><b>{valueY.value}</b></span>";
-series.tooltipText = "[#000]{valueY.value}[/]";
+series.dataFields.valueY = "PPM";
+series.tooltipHTML = "<img src='../../../images/CO2.png' style='vertical-align:bottom; margin-right: 10px; width:35px; height:28px;'><span style='font-size:14px; color:#000000;'><b>{valueY.value}</b></span>";
+series.tooltipText = "[#000{valueY.value}[/]";
 series.tooltip.background.fill = am4core.color("#FFF");
 series.tooltip.getStrokeFromObject = true;
 series.tooltip.background.strokeWidth = 3;
@@ -129,13 +174,11 @@ series.strokeWidth = 2;
 series.stacked = false; //false sinon les courbes ne peuvent pas se superposer
 
 
-/* == LIMITE ROUGE A NE PAS DEPASSER == */
+/* == LIMITE ROUGE A NE PAS DEPASSER ==*/
 var series2 = chart.series.push(new am4charts.LineSeries());
 series2.name = "Limite à ne pas dépasser";
-series2.dataFields.dateX = "year";
-series2.dataFields.valueY = "800ppm";
-series2.tooltipHTML = "<img src='../../images/danger.png' style='vertical-align:bottom; margin-right: 10px; width:26px; height:28px;'><span style='font-size:14px; color:#000000;'><b>{valueY.value}</b></span>";
-series2.tooltipText = "[#000]{valueY.value}[/]";
+series2.dataFields.dateX = "date";
+series2.dataFields.valueY = "limit";
 series2.tooltip.background.fill = am4core.color("#FFF");
 series2.tooltip.getFillFromObject = false;
 series2.tooltip.getStrokeFromObject = true;
