@@ -9,9 +9,7 @@ class Accueil extends CI_Controller
 		$this->load->library('form_validation');
 		$this->load->library('email');
 		$this->load->model('Model_connexion');
-		if($this->session->has_userdata('nom')) { //Si une session existe alors renvoie au menu
-			redirect('MenuPrincipal');
-		}
+		$this->session->sess_destroy();
 
 	}
 
