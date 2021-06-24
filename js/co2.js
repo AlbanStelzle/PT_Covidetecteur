@@ -1,10 +1,10 @@
 /**
  * ---------------------------------------
  * This demo was created using amCharts 4.
- * 
+ *
  * For more information visit:
  * https://www.amcharts.com/
- * 
+ *
  * Documentation is available at:
  * https://www.amcharts.com/docs/v4/
  * ---------------------------------------
@@ -96,8 +96,6 @@ function attributeData(){
 
 			}
 		}
-		console.log("ici ");
-		console.log(data);
 
 	}else if(when === "week"){
 		let date = new Date();
@@ -115,48 +113,131 @@ function attributeData(){
 
 		let max = date.getTime()
 		console.log(" avant : " +new Date(min)+ " max : "+new Date(max));
+		let PPM =0;
+		let dates = null;
+		let limit = 800;
+		let y = 0;
+		let boolgetfirst = true;
+		let before= null;
+		let after= null;
+		let nbskip = 0;
+		for (let i = 0,w=0; i < dataco2.length; i++) {
 
-		for(let i = 0; i < dataco2.length ; i++){
-			if(new Date(dataco2[i].date).getTime() > min && new Date(dataco2[i].date).getTime() < max) {
+			if (new Date(dataco2[i].date).getTime() > min && new Date(dataco2[i].date).getTime() < max) {
+				let day = new Date(dataco2[i].date).getDate();
+				let daytemp = null
+				if(i!=dataco2.length-1) {
+					daytemp = new Date(dataco2[i + 1].date).getDate()
+				}
+				if(day == daytemp){
+					PPM= +PPM + +dataco2[i].PPM;
+					dates = dataco2[i].date;
+					y++;
+				}else{
+					PPM= +PPM + +dataco2[i].PPM;
+					y++;
+					dataDay[w] = {
+						PPM: Math.round(PPM /y),
+						date: dates,
+						limit:limit
+					}
+					w++;
+					y=0;
+					PPM = 0;
+					dates = null;
+				}
+			}
+		}
+		let value =[]
+		let mini = 0;
 
-				if (i != dataco2.length - 1) {
+		for(let i = 0; i < dataDay.length ; i++){
 
-					let min = (new Date(dataco2[i + 1].date).getTime() - new Date(dataco2[i].date).getTime()) / (1000 * 60);
-					if (min > 20) {
-						let nbskip = min / 10;
+				if (i != dataDay.length - 1) {
+					 mini = (new Date(dataDay[i + 1].date).getTime() - new Date(dataDay[i].date).getTime()) / (1000 * 60*60 * 24);
+					if(boolgetfirst){
+						before =  (new Date(dataDay[i].date).getTime() - min) / (1000 * 60*60 * 24)
+						boolgetfirst = false;
+					}
+
+					console.log("before: ",before)
+					if(before>1){
+					nbskip = before
+
 						for (let y = 0; y < nbskip; y++) {
-							let date = new Date(dataco2[i].date)
-							date.setMinutes(date.getMinutes() + y * 10);
+							 date = new Date(dataDay[i].date)
+							date.setDate(date.getDate() - y);
 
-							let value = {
+							 value = {
 								"PPM": 0,
 								"date": date,
 								"limit": 800
 							}
+							console.log("0",value)
+							data.push(value);
+
+						}
+
+					}
+					if (mini > 1) {
+						 nbskip= mini;
+						for (let y = 0; y < nbskip; y++) {
+							let date = new Date(dataDay[i].date)
+							date.setDate(date.getDate() + y);
+
+							 value = {
+								"PPM": 0,
+								"date": date,
+								"limit": 800
+							}
+							console.log("1",value)
 							data.push(value);
 
 						}
 					} else {
-						let value = {
-							"PPM": dataco2[i].PPM,
-							"date": dataco2[i].date,
+						 value = {
+							"PPM": dataDay[i].PPM,
+							"date": dataDay[i].date,
 							limit: 800
 						}
+						console.log("2",value)
+
 						data.push(value);
 
 					}
 				} else {
-					let value = {
-						"PPM": dataco2[i].PPM,
-						"date": dataco2[i].date,
+					 value = {
+						"PPM": dataDay[i].PPM,
+						"date": dataDay[i].date,
 						limit: 800
 					}
+					console.log("3",value)
+
 					data.push(value);
 
 				}
 
 			}
+		if(new Date(data[data.length-1].date).getTime() < max){
+			after = (max - new Date(data[data.length-1].date).getTime() ) / (1000 * 60*60 * 24)
+			let date = new Date(data[data.length - 1].date)
+
+			if(after>1) {
+				let value =[]
+				for (let y = 1; y < after; y++) {
+					date.setDate(date.getDate() + 1);
+					value = {
+						"PPM": 0,
+						"date": new Date(date.getTime()),
+						"limit": 800
+					}
+					data.push(value);
+
+				}
+			}
 		}
+
+
 
 	}else if(when === "month") {
 
@@ -182,6 +263,9 @@ function attributeData(){
 		let dates = null;
 		let limit = 800;
 		let y = 0;
+		let boolgetfirst = true
+		let before = 0
+		let after = 0
 		for (let i = 0,w=0; i < dataco2.length; i++) {
 
 
@@ -196,7 +280,6 @@ function attributeData(){
 					PPM= +PPM + +dataco2[i].PPM;
 					dates = dataco2[i].date;
 					y++;
-					console.log(PPM)
 				}else{
 					PPM= +PPM + +dataco2[i].PPM;
 					y++;
@@ -205,7 +288,6 @@ function attributeData(){
 						date: dates,
 						limit:limit
 					}
-					console.log(dataDay[w])
 					w++;
 					y=0;
 					PPM = 0;
@@ -213,9 +295,32 @@ function attributeData(){
 				}
 			}
 		}
-		data.push(dataDay[0]);
 		for (let i = 0; i < dataDay.length; i++) {
 					if(i != dataDay.length-1) {
+						if(boolgetfirst){
+							before =  (new Date(dataDay[i].date).getTime() - min) / (1000 * 60*60 * 24)
+							boolgetfirst = false;
+						}
+						if(before>1){
+							nbskip = before
+
+							for (let y = 0; y < nbskip-1; y++) {
+								let date = new Date(min)
+								date.setDate(date.getDate() + y);
+
+								let value = {
+									"PPM": 0,
+									"date": date,
+									"limit": 800
+								}
+								data.push(value);
+
+							}
+							before = 0;
+							data.push(dataDay[0]);
+
+
+						}
 						let mini = (new Date(dataDay[i+1].date).getTime() - new Date(dataDay[i].date).getTime()) / (1000 * 60 * 60 * 24);
 						if (mini > 1) {
 							let nbskip = mini;
@@ -237,7 +342,6 @@ function attributeData(){
 								"date": dataDay[i].date,
 								limit: 800
 							}
-							console.log()
 							data.push(value);
 
 						}
@@ -250,9 +354,26 @@ function attributeData(){
 						data.push(value);
 					}
 		}
+
+		if(new Date(data[data.length-1].date).getTime() < max){
+			after = (max - new Date(data[data.length-1].date).getTime() ) / (1000 * 60*60 * 24)
+			let date = new Date(data[data.length - 1].date)
+
+			if(after>1) {
+				let value =[]
+				for (let y = 1; y < after; y++) {
+					date.setDate(date.getDate() + 1);
+					 value = {
+						"PPM": 0,
+						"date": new Date(date.getTime()),
+						"limit": 800
+					}
+					data.push(value);
+
+				}
+			}
 		}
-
-
+		}
 	chart.data = data;
 	if(status === true){
 		createGraph();
@@ -273,9 +394,7 @@ function attributeData(){
 			count: 1
 		}
 	}
-	console.log(dataDay)
-
-	console.log(chart.data)
+	console.log("chart.dada",chart.data)
 	chart.validateData();
 }
 function createGraph() {

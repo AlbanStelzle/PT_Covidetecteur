@@ -111,10 +111,10 @@ $this->load->helper('html'); ?>
 						<label class="btn btn-outline-primary" for="btnradio1">Jour</label>
 
 						<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" value="week" onclick="attributeData()">
-						<label class="btn btn-outline-primary" for="btnradio2">Cette semaine</label>
+						<label class="btn btn-outline-primary" for="btnradio2">Semaine</label>
 
 						<input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" value="month" onclick="attributeData()">
-						<label class="btn btn-outline-primary" for="btnradio3">Ce mois-ci</label>
+						<label class="btn btn-outline-primary" for="btnradio3">Mois</label>
 					</div>
 					<div id="chart">
 					</div>
