@@ -80,48 +80,63 @@ $this->load->helper('html'); ?>
 			<div class="card border-0 shadow my-4">
 				<div class="card-body p-6">
 
-					<nav class="navbar navbar-expand-lg navbar-light bg-light">
-						<div class="container-fluid">
-							<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-									data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-									aria-expanded="false" aria-label="Toggle navigation">
-								<span class="navbar-toggler-icon"></span>
-							</button>
-							<div class="collapse navbar-collapse" id="navbarSupportedContent">
-								<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-									<li class="nav-item">
-										<button type="button" class="btn btn-primary m-1" id="co2">CO2</button>
-									</li>
-									<li class="nav-item">
-										<button type="button" class="btn btn-primary m-1" id="humidite">Humidité
-										</button>
-									</li>
-									<li class="nav-item">
-										<button type="button" class="btn btn-primary m-1" id="temperature">Temperature
-										</button>
-									</li>
+					<div class="btn-toolbar" role="toolbar" aria-label="Group button">
 
-								</ul>
+					<div class="btn-group m-auto" role="group" aria-label="First group">
+								<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked value="CO2" onclick="attributeData()">
+								<label class="btn btn-outline-primary" for="btnradio1">CO2</label>
+
+								<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" value="Humidity" onclick="attributeData()">
+								<label class="btn btn-outline-primary" for="btnradio2">Humidité</label>
+
+								<input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" value="Temp" onclick="attributeData()">
+								<label class="btn btn-outline-primary" for="btnradio3">Température</label>
+
 							</div>
-						</div>
-					</nav>
 					<!-- zone d'affichage des graphiques -->
-					<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-						<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked value="day" onclick="attributeData()">
-						<label class="btn btn-outline-primary" for="btnradio1">Jour</label>
 
-						<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" value="week" onclick="attributeData()">
-						<label class="btn btn-outline-primary" for="btnradio2">Semaine</label>
+					<div class="btn-group m-auto" role="group" aria-label="Second group">
+						<input type="radio" class="btn-check" name="btnradio2" id="btnradio4" autocomplete="off" checked value="day" onclick="attributeData()">
+						<label class="btn btn-outline-primary" for="btnradio4">Jour</label>
 
-						<input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" value="month" onclick="attributeData()">
-						<label class="btn btn-outline-primary" for="btnradio3">Mois</label>
+						<input type="radio" class="btn-check" name="btnradio2" id="btnradio5" autocomplete="off" value="week" onclick="attributeData()">
+						<label class="btn btn-outline-primary" for="btnradio5">Semaine</label>
+
+						<input type="radio" class="btn-check" name="btnradio2" id="btnradio6" autocomplete="off" value="month" onclick="attributeData()">
+						<label class="btn btn-outline-primary" for="btnradio6">Mois</label>
+
+					</div>
+					<input type="date" class="form-control w-25" id="date" onchange="attributeData()">
+
+
 					</div>
 					<div id="chart">
 					</div>
+
 					<?php $data = json_encode($detecteur) ?>
 					<script>
 						let dataco2 = <?php print_r($data);?>;
+						console.log(dataco2)
+						function getWhen(){
+							let valeur = [];
+							let radios = document.getElementsByName('btnradio');
+							let radios2 = document.getElementsByName('btnradio2');
 
+							for(let i = 0; i < radios.length; i++){
+								if(radios[i].checked){
+									valeur["what"] = radios[i].value;
+
+								}
+							}
+							for(let i = 0; i < radios2.length; i++){
+								if(radios2[i].checked){
+									valeur["when"] = radios2[i].value;
+
+								}
+							}
+							console.log(valeur)
+							return valeur;
+						}
 						// modal (pop-up) automatique
 
 						$(window).on('load', function () {
@@ -132,7 +147,7 @@ $this->load->helper('html'); ?>
 						document.getElementById('chart').innerHTML = '<div id="chart_co2"></div>';
 
 						document.getElementById("co2").addEventListener("click", displayCo2);
-
+						if(getWhen())
 						function displayCo2() {
 							document.getElementById('chart').innerHTML = '<div id="chart_co2"></div>';
 							//recharge le js
@@ -142,27 +157,6 @@ $this->load->helper('html'); ?>
 							head.appendChild(script);
 						}
 
-						document.getElementById("humidite").addEventListener("click", displayHumidite);
-
-						function displayHumidite() {
-							document.getElementById('chart').innerHTML = '<div id="chart_humidite"></div>';
-							//recharge le js
-							var head = document.getElementsByTagName('head')[0];
-							var script = document.createElement('script');
-							script.src = '<?php echo base_url()?>js/humidite.js';
-							head.appendChild(script);
-						}
-
-						document.getElementById("temperature").addEventListener("click", displayTemperature);
-
-						function displayTemperature() {
-							document.getElementById('chart').innerHTML = '<div id="chart_temperature"></div>';
-							//recharge le js
-							var head = document.getElementsByTagName('head')[0];
-							var script = document.createElement('script');
-							script.src = '<?php echo base_url()?>js/temperature.js';
-							head.appendChild(script);
-						}
 
 					</script>
 

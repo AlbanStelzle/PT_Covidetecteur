@@ -16,34 +16,24 @@ am4core.useTheme(am4themes_animated);
 
 let chart = am4core.create("chart_co2", am4charts.XYChart);
 let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-
+let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+let series;
+let series2;
 let status = true;
-
+let boolseries = false
 
 chart.data = [];
-let data = [];
-let radios = document.getElementsByName('btnradio');
-function getWhen(){
-	let valeur;
+let datatab = [];
 
-	for(let i = 0; i < radios.length; i++){
-		if(radios[i].checked){
-			valeur = radios[i].value;
-
-		}
-	}
-	return valeur;
-}
 attributeData();
 
 function attributeData(){
 	let dataDay =[];
 
 	let when = getWhen();
-	data = [];
-	if(when === "day"){
+	datatab = [];
+	if(when["when"] === "day"){
 		let date = new Date();
-
 		date.setHours(0);
 		date.setMinutes(0);
 		date.setSeconds(0);
@@ -55,9 +45,11 @@ function attributeData(){
 		let max = date.getTime()
 
 		console.log(" avant : " +new Date(min)+ " max : "+new Date(max));
+		let value = []
 		for(let i = 0; i < dataco2.length ; i++){
 			if(new Date(dataco2[i].date).getTime() > min && new Date(dataco2[i].date).getTime() < max) {
 				if (i != dataco2.length - 1) {
+
 					let mini = (new Date(dataco2[i + 1].date).getTime() - new Date(dataco2[i].date).getTime()) / (1000 * 60);
 					if (mini > 11) {
 						let nbskip = mini / 10;
@@ -65,39 +57,59 @@ function attributeData(){
 							let date = new Date(dataco2[i].date)
 							date.setMinutes(date.getMinutes() + y * 10);
 
-							let value = {
+							 value = {
 								"PPM": 0,
 								"date": date,
 								"limit": 800
 							}
-							data.push(value);
+							datatab.push(value);
 
 						}
 					} else {
-						let value = {
+						 value = {
 							"PPM": dataco2[i].PPM,
 							"date": dataco2[i].date,
 							limit: 800
 						}
 
-						data.push(value);
+						datatab.push(value);
 
 					}
 				} else {
-					let value = {
+					 value = {
 						"PPM": dataco2[i].PPM,
 						"date": dataco2[i].date,
 						limit: 800
 					}
 
-					data.push(value);
+					datatab.push(value);
 
 				}
 
 			}
 		}
+		if(new Date(datatab[datatab.length-1].date).getTime() < max){
+			after = (max - new Date(datatab[datatab.length-1].date).getTime() ) / (1000 * 60)
+			let date = new Date(datatab[datatab.length - 1].date)
 
-	}else if(when === "week"){
+			if(after>11) {
+				let value =[]
+				for (let y = 1; y < after; y++) {
+					date.setMinutes(date.getMinutes() + 10);
+					value = {
+						"PPM": 0,
+						"date": new Date(date.getTime()),
+						"limit": 800
+					}
+					datatab.push(value);
+
+				}
+			}
+		}
+
+
+	}
+	else if(when["when"] === "week"){
 		let date = new Date();
 
 		date.setDate(date.getDate() - date.getDay() + (date.getDay() == 0 ? -6:1))
@@ -113,7 +125,7 @@ function attributeData(){
 
 		let max = date.getTime()
 		console.log(" avant : " +new Date(min)+ " max : "+new Date(max));
-		let PPM =0;
+		let data =0;
 		let dates = null;
 		let limit = 800;
 		let y = 0;
@@ -130,20 +142,35 @@ function attributeData(){
 					daytemp = new Date(dataco2[i + 1].date).getDate()
 				}
 				if(day == daytemp){
-					PPM= +PPM + +dataco2[i].PPM;
+					switch (when["what"]) {
+						case "CO2":data = +data + +dataco2[i].PPM;
+						break;
+						case "Humidity": data = +data + +dataco2[i].humidite;
+						break;
+						case "Temp": data = +data + +dataco2[i].degre;
+						break;
+					}
+
 					dates = dataco2[i].date;
 					y++;
 				}else{
-					PPM= +PPM + +dataco2[i].PPM;
+					switch (when["what"]) {
+						case "CO2":data = +data + +dataco2[i].PPM;
+							break;
+						case "Humidity": data = +data + +dataco2[i].humidite;
+							break;
+						case "Temp": data = +data + +dataco2[i].degre;
+							break;
+					}
 					y++;
 					dataDay[w] = {
-						PPM: Math.round(PPM /y),
+						data: Math.round(data /y),
 						date: dates,
 						limit:limit
 					}
 					w++;
 					y=0;
-					PPM = 0;
+					data = 0;
 					dates = null;
 				}
 			}
@@ -169,12 +196,12 @@ function attributeData(){
 							date.setDate(date.getDate() - y);
 
 							 value = {
-								"PPM": 0,
+								"data": 0,
 								"date": date,
 								"limit": 800
 							}
 							console.log("0",value)
-							data.push(value);
+							datatab.push(value);
 
 						}
 
@@ -186,52 +213,52 @@ function attributeData(){
 							date.setDate(date.getDate() + y);
 
 							 value = {
-								"PPM": 0,
+								"data": 0,
 								"date": date,
 								"limit": 800
 							}
 							console.log("1",value)
-							data.push(value);
+							datatab.push(value);
 
 						}
 					} else {
 						 value = {
-							"PPM": dataDay[i].PPM,
+							"data": dataDay[i].data,
 							"date": dataDay[i].date,
 							limit: 800
 						}
 						console.log("2",value)
 
-						data.push(value);
+						datatab.push(value);
 
 					}
 				} else {
 					 value = {
-						"PPM": dataDay[i].PPM,
+						"data": dataDay[i].data,
 						"date": dataDay[i].date,
 						limit: 800
 					}
 					console.log("3",value)
 
-					data.push(value);
+					datatab.push(value);
 
 				}
 
 			}
-		if(new Date(data[data.length-1].date).getTime() < max){
-			after = (max - new Date(data[data.length-1].date).getTime() ) / (1000 * 60*60 * 24)
-			let date = new Date(data[data.length - 1].date)
+		if(new Date(datatab[datatab.length-1].date).getTime() < max){
+			after = (max - new Date(datatab[datatab.length-1].date).getTime() ) / (1000 * 60*60 * 24)
+			let date = new Date(datatab[datatab.length - 1].date)
 
 			if(after>1) {
 				let value =[]
 				for (let y = 1; y < after; y++) {
 					date.setDate(date.getDate() + 1);
 					value = {
-						"PPM": 0,
+						"data": 0,
 						"date": new Date(date.getTime()),
 						"limit": 800
 					}
-					data.push(value);
+					datatab.push(value);
 
 				}
 			}
@@ -239,7 +266,8 @@ function attributeData(){
 
 
 
-	}else if(when === "month") {
+	}
+	else if(when["when"] === "month") {
 
 
 		let date = new Date();
@@ -259,7 +287,7 @@ function attributeData(){
 
 		let max = date.getTime()
 		console.log(" avant : " + new Date(min) + " max : " + new Date(max));
-		let PPM =0;
+		let data =0;
 		let dates = null;
 		let limit = 800;
 		let y = 0;
@@ -277,20 +305,35 @@ function attributeData(){
 				}
 
 				if(day == daytemp){
-					PPM= +PPM + +dataco2[i].PPM;
+					if(when["what"])
+						switch (when["what"]) {
+							case "CO2":data = +data + +dataco2[i].PPM;
+							break;
+							case "Humidity": data = +data + +dataco2[i].humidite;
+							break;
+							case "Temp": data = +data + +dataco2[i].degre;
+							break;
+						}
 					dates = dataco2[i].date;
 					y++;
 				}else{
-					PPM= +PPM + +dataco2[i].PPM;
+					switch (when["what"]) {
+						case "CO2":data = +data + +dataco2[i].PPM;
+						break;
+						case "Humidity": data = +data + +dataco2[i].humidite;
+						break;
+						case "Temp": data = +data + +dataco2[i].degre;
+						break;
+					}
 					y++;
 					dataDay[w] = {
-						PPM: Math.round(PPM /y),
+						data: Math.round(data /y),
 						date: dates,
 						limit:limit
 					}
 					w++;
 					y=0;
-					PPM = 0;
+					data = 0;
 					dates = null;
 				}
 			}
@@ -309,15 +352,15 @@ function attributeData(){
 								date.setDate(date.getDate() + y);
 
 								let value = {
-									"PPM": 0,
+									"data": 0,
 									"date": date,
 									"limit": 800
 								}
-								data.push(value);
+								datatab.push(value);
 
 							}
 							before = 0;
-							data.push(dataDay[0]);
+							datatab.push(dataDay[0]);
 
 
 						}
@@ -329,73 +372,100 @@ function attributeData(){
 								date.setDate(date.getDate() + y);
 
 								let value = {
-									"PPM": 0,
+									"data": 0,
 									"date": date,
 									"limit": 800
 								}
-								data.push(value);
+								datatab.push(value);
 
 							}
 						} else {
 							let value = {
-								"PPM": dataDay[i].PPM,
+								"data": dataDay[i].data,
 								"date": dataDay[i].date,
 								limit: 800
 							}
-							data.push(value);
+							datatab.push(value);
 
 						}
 					}else{
 						let value = {
-							"PPM": dataDay[i].PPM,
+							"data": dataDay[i].data,
 							"date": dataDay[i].date,
 							limit: 800
 						}
-						data.push(value);
+						datatab.push(value);
 					}
 		}
 
-		if(new Date(data[data.length-1].date).getTime() < max){
-			after = (max - new Date(data[data.length-1].date).getTime() ) / (1000 * 60*60 * 24)
-			let date = new Date(data[data.length - 1].date)
+		if(new Date(datatab[datatab.length-1].date).getTime() < max){
+			after = (max - new Date(datatab[datatab.length-1].date).getTime() ) / (1000 * 60*60 * 24)
+			let date = new Date(datatab[datatab.length - 1].date)
 
 			if(after>1) {
 				let value =[]
 				for (let y = 1; y < after; y++) {
 					date.setDate(date.getDate() + 1);
 					 value = {
-						"PPM": 0,
+						"data": 0,
 						"date": new Date(date.getTime()),
 						"limit": 800
 					}
-					data.push(value);
+					datatab.push(value);
 
 				}
 			}
 		}
 		}
-	chart.data = data;
+	chart.data = datatab;
 	if(status === true){
 		createGraph();
 	}
-	if(getWhen() == "day") {
-		dateAxis.baseInterval = {
+	switch (when["when"]) {
+		case "day":dateAxis.baseInterval = {
 			timeUnit: "minute",
 			count: 10
-		}
-	}else if(getWhen() == "week"){
-		dateAxis.baseInterval = {
+		};
+			break;
+		case "week": dateAxis.baseInterval = {
 			timeUnit: "day",
 			count: 1
-		}
-	}else if(getWhen() == "month"){
-		dateAxis.baseInterval = {
+		};
+			break;
+		case "month": dateAxis.baseInterval = {
 			timeUnit: "day",
 			count: 1
-		}
+		};
+			break;
+	}
+	switch (when["what"]) {
+		case "CO2":
+			series.name = "CO2 de la pièce en PPM";
+			valueAxis.title.text = "Partie par million (PPM)";
+			if(boolseries){
+				series2.show()
+				boolseries = false
+			}
+			break;
+		case "Humidity":
+			series.name = "Humidité de la pièce en %";
+			valueAxis.title.text = "Humidité (%)";
+
+			series2.hidden = true;
+			boolseries = true
+			break;
+		case "Temp":
+			series.name = "Température de la pièce en °C";
+			valueAxis.title.text = "Degré (°C)";
+
+			series2.hidden = true;
+			boolseries = true;
+			break;
 	}
 	console.log("chart.dada",chart.data)
+	console.log("series",chart.series)
 	chart.validateData();
+
 }
 function createGraph() {
 	if(chart.data.length != 0) {
@@ -406,15 +476,14 @@ function createGraph() {
 		dateAxis.endLocation = 0.5;
 		dateAxis.tooltipDateFormat = "dd-MM-yyyy HH:mm";
 
-		let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-		valueAxis.tooltip.disabled = true;
+		valueAxis.title.text = "Partie par million (PPM)";
 
 
 		/* == COURBE BLEU VALEURS CO2 == */
-		let series = chart.series.push(new am4charts.LineSeries());
+		series = chart.series.push(new am4charts.LineSeries());
 		series.dataFields.dateX = "date";
 		series.name = "CO2 de la pièce en PPM";
-		series.dataFields.valueY = "PPM";
+		series.dataFields.valueY = "data";
 		series.tooltipHTML = "<img src='../../../images/CO2.png' style='vertical-align:bottom; margin-right: 10px; width:35px; height:28px;'><span style='font-size:14px; color:#000000;'><b>{valueY.value}</b></span>";
 		series.tooltip.background.fill = am4core.color("#FFF");
 		series.tooltip.getStrokeFromObject = true;
@@ -427,7 +496,8 @@ function createGraph() {
 
 
 		/* == LIMITE ROUGE A NE PAS DEPASSER ==*/
-		let series2 = chart.series.push(new am4charts.LineSeries());
+		series2 = new am4charts.LineSeries();
+		chart.series.push(series2)
 		series2.name = "Limite à ne pas dépasser";
 		series2.dataFields.dateX = "date";
 		series2.dataFields.valueY = "limit";
