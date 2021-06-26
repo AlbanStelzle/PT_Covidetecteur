@@ -1,5 +1,6 @@
 /*//////////////////////////////////////////////////////////////////
 [ Apparence Générale ]*/
+
 html
 {
   scroll-behavior: smooth;
@@ -13,6 +14,14 @@ body
   	-moz-background-size: cover;
   	background-size: cover;
   	-o-background-size: cover;
+}
+
+li, img { /* non selectable image*/
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-o-user-select: none;
+user-select: none;
 }
 
 footer
@@ -35,49 +44,14 @@ footer
   opacity: 0.88;
 }
 
-/*//////////////////////////////////////////////////////////////////
-[ Logo et Titre du site]*/
-.logo-nom-site h1
-{
-	color: white;
-}
-
-.logo-nom-site
-{
-	text-align: center;
-}
-
-.logo-nom-site img
-{
-	width: 8%;
-}
-
-/*//////////////////////////////////////////////////////////////////
-[ Boutons / Se connecter - Inscription ]*/
-.connexion, .inscription
-{
-	display: block;
-	text-align: center;
-}
-
-.inscription img
-{
-	width: 24%;
-}
-
-.connexion img
-{
-	width: 24%;
-}
 
 
-/*//////////////////////////////////////////////////////////////////
-[ Footer ]*/
-footer img
-{
-	width: 15%;
-	padding-bottom: 10px;
-}
+
+
+
+
+
+
 
 
 
@@ -99,4 +73,189 @@ footer img
 .logo-confirmation
 {
 	width: 10%;
+}
+
+
+
+/*==================================VERSION ORDINATEUR==================================*/
+@media screen and (min-width: 800px){
+
+	/*//////////////////////////////////////////////////////////////////
+[ Logo et Titre du site]*/
+.logo-nom-site h1
+{
+	color: white;
+	font-size: 350%;
+}
+
+.logo-nom-site
+{
+	text-align: center;
+}
+
+.logo-nom-site img
+{
+	width: 6%;
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ Boutons / Se connecter - Inscription ]*/
+.connexion, .inscription
+{
+	display: block;
+	text-align: center;
+}
+
+.connexion img
+{
+	width: 24%;
+	margin-top: 5%;
+}
+
+.inscription img
+{
+	width: 24%;
+}
+
+
+/*//////////////////////////////////////////////////////////////////
+[ Footer ]*/
+footer{
+	bottom: 0;
+    color: #707070;
+    height: 2em;
+    left: 0;
+    margin-top: 5%;
+    position: relative;
+    width:100%;
+    line-height: 1.;
+}
+footer img
+{
+	width: 15%;
+	padding-bottom: 10px;
+}
+
+.text-footer
+{
+ 	font-size: 80%;
+}
+
+
+.carte-blanche-connexion
+{
+	width:50%;
+}
+
+.carte-blanche-inscription
+{
+	width:50%;
+}
+
+.logo-page-inscription
+{
+	margin-left: auto;
+    margin-right: auto;
+	width: 20%
+}
+
+.logo-page-connexion
+{
+	margin-left: auto;
+    margin-right: auto;
+	width: 20%
+}
+
+.form-size{
+	width: 50%;
+}
+
+
+}
+
+
+
+/*==================================VERSION SMARTPHONE==================================*/
+@media screen and (max-width: 800px){
+
+	/*//////////////////////////////////////////////////////////////////
+[ Logo et Titre du site]*/
+.logo-nom-site h1
+{
+	color: white;
+	font-size: 230%;
+}
+
+.logo-nom-site
+{
+	text-align: center;
+}
+
+.logo-nom-site img
+{
+	width: 20%;
+}
+
+
+/*//////////////////////////////////////////////////////////////////
+[ Boutons / Se connecter - Inscription ]*/
+.connexion, .inscription
+{
+	display: block;
+	text-align: center;
+}
+
+.connexion img
+{
+	width: 80%;
+	margin-top: 10%;
+}
+
+.inscription img
+{
+	width: 80%;
+	margin-top: 2%;
+}
+
+
+/*//////////////////////////////////////////////////////////////////
+[ Footer ]*/
+footer{
+	bottom: 0;
+    color: #707070;
+    height: 2em;
+    left: 0;
+    margin-top: 15%;
+    position: relative;
+    width:100%;
+    line-height: 1.;
+}
+footer img
+{
+	width: 50%;
+	padding-bottom: 10px;
+}
+
+.text-footer
+{
+ 	font-size: 65%;
+}
+
+.logo-page-inscription
+{
+	margin-left: auto;
+    margin-right: auto;
+	width: 30%
+}
+
+.logo-page-connexion
+{
+	margin-left: auto;
+    margin-right: auto;
+	width: 30%
+}
+
+.form-size{
+	width: 70%;
+}
 }
