@@ -83,31 +83,37 @@ $this->load->helper('html'); ?>
 					<div class="btn-toolbar" role="toolbar" aria-label="Group button">
 
 					<div class="btn-group m-auto" role="group" aria-label="First group">
-								<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked value="CO2" onclick="attributeData()">
+								<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked value="CO2" onclick="setInfo()">
 								<label class="btn btn-outline-primary" for="btnradio1">CO2</label>
 
-								<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" value="Humidity" onclick="attributeData()">
+								<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" value="Humidity" onclick="setInfo()">
 								<label class="btn btn-outline-primary" for="btnradio2">Humidité</label>
 
-								<input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" value="Temp" onclick="attributeData()">
+								<input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" value="Temp" onclick="setInfo()">
 								<label class="btn btn-outline-primary" for="btnradio3">Température</label>
 
 							</div>
 					<!-- zone d'affichage des graphiques -->
 
 					<div class="btn-group m-auto" role="group" aria-label="Second group">
-						<input type="radio" class="btn-check" name="btnradio2" id="btnradio4" autocomplete="off" checked value="day" onclick="attributeData()">
+						<input type="radio" class="btn-check" name="btnradio2" id="btnradio4" autocomplete="off" checked value="day" onclick="setDateDropdown();">
 						<label class="btn btn-outline-primary" for="btnradio4">Jour</label>
 
-						<input type="radio" class="btn-check" name="btnradio2" id="btnradio5" autocomplete="off" value="week" onclick="attributeData()">
+						<input type="radio" class="btn-check" name="btnradio2" id="btnradio5" autocomplete="off" value="week" onclick="setDateDropdown();">
 						<label class="btn btn-outline-primary" for="btnradio5">Semaine</label>
 
-						<input type="radio" class="btn-check" name="btnradio2" id="btnradio6" autocomplete="off" value="month" onclick="attributeData()">
+						<input type="radio" class="btn-check" name="btnradio2" id="btnradio6" autocomplete="off" value="month" onclick="setDateDropdown();">
 						<label class="btn btn-outline-primary" for="btnradio6">Mois</label>
 
 					</div>
-					<input type="date" class="form-control w-25" id="date" onchange="attributeData()">
+						<div class="dropdown">
+							<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Sélectionnez une date
+							</button>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="dropdownDate">
 
+							</div>
+						</div>
 
 					</div>
 					<div id="chart">
@@ -116,27 +122,6 @@ $this->load->helper('html'); ?>
 					<?php $data = json_encode($detecteur) ?>
 					<script>
 						let dataco2 = <?php print_r($data);?>;
-						console.log(dataco2)
-						function getWhen(){
-							let valeur = [];
-							let radios = document.getElementsByName('btnradio');
-							let radios2 = document.getElementsByName('btnradio2');
-
-							for(let i = 0; i < radios.length; i++){
-								if(radios[i].checked){
-									valeur["what"] = radios[i].value;
-
-								}
-							}
-							for(let i = 0; i < radios2.length; i++){
-								if(radios2[i].checked){
-									valeur["when"] = radios2[i].value;
-
-								}
-							}
-							console.log(valeur)
-							return valeur;
-						}
 						// modal (pop-up) automatique
 
 						$(window).on('load', function () {

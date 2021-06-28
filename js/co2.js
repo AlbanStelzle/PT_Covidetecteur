@@ -24,16 +24,130 @@ let boolseries = false
 
 chart.data = [];
 let datatab = [];
+let allDate = [];
+let when = null
+let lastDateChose = null;
+const monthNames = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
+	"Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
+];
 
-attributeData();
+getAllDate()
+setInfo()
+setDateDropdown()
 
-function attributeData(){
+function setInfo(){
+	let valeur = [];
+	let radios = document.getElementsByName('btnradio');
+	let radios2 = document.getElementsByName('btnradio2');
+
+	for(let i = 0; i < radios.length; i++){
+		if(radios[i].checked){
+			valeur["what"] = radios[i].value;
+
+
+		}
+	}
+	for(let i = 0; i < radios2.length; i++){
+		if(radios2[i].checked){
+			valeur["when"] = radios2[i].value;
+
+		}
+	}
+	when = valeur;
+	if(lastDateChose != null){
+		attributeData(lastDateChose)
+	}else{
+		attributeData(allDate[allDate.length-1].date)
+
+	}
+
+}
+function setDateDropdown(){
+	let dropdown = document.getElementById("dropdownDate")
+	let buttontext;
+	setInfo();
+
+	switch (when["when"]) {
+
+		case "day":
+			while (document.getElementById("dropdownDate").firstChild) {
+				dropdown.removeChild(dropdown.lastChild);
+			}
+			for(let i = 0; i< allDate.length; i++){
+				buttontext =  "<a class=\"dropdown-item\" href=\"#\" onclick=\"attributeData('"+ allDate[i].date+"')\">"+allDate[i].date.getDate()+"/"+(allDate[i].date.getMonth()+1)+"/"+allDate[i].date.getFullYear()+"</a>"
+				dropdown.innerHTML+= (buttontext)
+
+			}
+			break;
+		case "week":
+			let firstdayofweek;
+			let lastdayofweek;
+			let weektemp = 0;
+			while (document.getElementById("dropdownDate").firstChild) {
+				dropdown.removeChild(dropdown.lastChild);
+			}
+			for(let i = 0; i< allDate.length; i++){
+				firstdayofweek = new Date(new Date(allDate[i].date).getFullYear(),new Date(allDate[i].date).getMonth(),(new Date(allDate[i].date).getDate() - new Date(allDate[i].date).getUTCDay()))
+				lastdayofweek = new Date(firstdayofweek);
+				lastdayofweek.setDate(lastdayofweek.getUTCDate()+7)
+
+				if(firstdayofweek.getTime() != weektemp) {
+					buttontext = "<a class=\"dropdown-item\" href=\"#\" onclick=\"attributeData('"+ new Date(allDate[i].date)+"')\">Du " + firstdayofweek.getDate() + "/" + (firstdayofweek.getMonth() + 1) + "/" + firstdayofweek.getFullYear() + " au " + lastdayofweek.getDate() + "/" + (lastdayofweek.getMonth() + 1) + "/" + lastdayofweek.getFullYear() +"</a>"
+					dropdown.innerHTML += (buttontext)
+				}
+				weektemp = firstdayofweek.getTime();
+			}
+			break;
+		case "month":
+			let month;
+			let monthtemp;
+			while (document.getElementById("dropdownDate").firstChild) {
+				dropdown.removeChild(dropdown.lastChild);
+			}
+			for(let i = 0; i< allDate.length; i++){
+				month = new Date(new Date(allDate[i].date)).getUTCMonth()
+				if(i < allDate.length - 1){
+					monthtemp = new Date(new Date(allDate[i+1].date)).getUTCMonth()
+				}
+				if(i == 0){
+					buttontext = "<a class=\"dropdown-item\" href=\"#\" onclick=\"attributeData('" + allDate[i].date + "')\">Mois de "+monthNames[new Date(allDate[i].date).getUTCMonth()]+"</a>"
+					dropdown.innerHTML += (buttontext)
+				}else {
+					if (month != monthtemp) {
+						buttontext = "<a class=\"dropdown-item\" href=\"#\" onclick=\"attributeData('" + allDate[i].date + "')\">Mois de " + monthNames[new Date(allDate[i].date).getUTCMonth()] + "</a>"
+						dropdown.innerHTML += (buttontext)
+					}
+					monthtemp = month;
+				}
+			}
+			break;
+	}
+}
+function getAllDate(){
+	let date;
+	let datetemp;
+	for (let i = 0,w=0; i < dataco2.length; i++) {
+		date = new Date(new Date(dataco2[i].date).getFullYear(),new Date(dataco2[i].date).getMonth(),new Date(dataco2[i].date).getDate());
+		if(i!=dataco2.length-1) {
+			datetemp = new Date(new Date(dataco2[i+1].date).getFullYear(),new Date(dataco2[i+1].date).getMonth(),new Date(dataco2[i+1].date).getDate());
+		}
+		if(date.getTime() !== datetemp.getTime()) {
+			allDate[w] = {date:date}
+			w++;
+
+		}
+	}
+console.log(allDate)
+}
+
+
+function attributeData(datechose){
 	let dataDay =[];
-
-	let when = getWhen();
 	datatab = [];
+	lastDateChose = datechose;
+
 	if(when["when"] === "day"){
-		let date = new Date();
+		let date = new Date(datechose);
 		date.setHours(0);
 		date.setMinutes(0);
 		date.setSeconds(0);
@@ -44,30 +158,41 @@ function attributeData(){
 		date.setSeconds(59);
 		let max = date.getTime()
 
-		console.log(" avant : " +new Date(min)+ " max : "+new Date(max));
+		//console.log(" avant : " +new Date(min)+ " max : "+new Date(max));
 		let value = []
+		let data = 0;
 		for(let i = 0; i < dataco2.length ; i++){
 			if(new Date(dataco2[i].date).getTime() > min && new Date(dataco2[i].date).getTime() < max) {
 				if (i != dataco2.length - 1) {
 
 					let mini = (new Date(dataco2[i + 1].date).getTime() - new Date(dataco2[i].date).getTime()) / (1000 * 60);
-					if (mini > 11) {
+					if (mini > 11 && new Date(dataco2[i+1].date).getTime() < max) {
 						let nbskip = mini / 10;
+
 						for (let y = 0; y < nbskip; y++) {
 							let date = new Date(dataco2[i].date)
 							date.setMinutes(date.getMinutes() + y * 10);
 
 							 value = {
-								"PPM": 0,
+								"data": 0,
 								"date": date,
 								"limit": 800
 							}
+
 							datatab.push(value);
 
 						}
 					} else {
+						switch (when["what"]) {
+							case "CO2": data = dataco2[i].PPM;
+								break;
+							case "Humidity": data = dataco2[i].humidite;
+								break;
+							case "Temp": data = dataco2[i].degre;
+								break;
+						}
 						 value = {
-							"PPM": dataco2[i].PPM,
+							"data": data,
 							"date": dataco2[i].date,
 							limit: 800
 						}
@@ -76,28 +201,39 @@ function attributeData(){
 
 					}
 				} else {
+					switch (when["what"]) {
+						case "CO2":data = +data + +dataco2[i].PPM;
+							break;
+						case "Humidity": data = +data + +dataco2[i].humidite;
+							break;
+						case "Temp": data = +data + +dataco2[i].degre;
+							break;
+					}
 					 value = {
-						"PPM": dataco2[i].PPM,
+						"data": data,
 						"date": dataco2[i].date,
 						limit: 800
 					}
-
 					datatab.push(value);
 
 				}
 
 			}
 		}
+		//console.log("date",new Date(datatab[datatab.length-1].date),"max",new Date(max))
+
 		if(new Date(datatab[datatab.length-1].date).getTime() < max){
-			after = (max - new Date(datatab[datatab.length-1].date).getTime() ) / (1000 * 60)
+			let after = (max - new Date(datatab[datatab.length-1].date).getTime() ) / (1000 * 60)
 			let date = new Date(datatab[datatab.length - 1].date)
 
 			if(after>11) {
+				let nbskip = after / 10;
+
 				let value =[]
-				for (let y = 1; y < after; y++) {
+				for (let y = 1; y < nbskip; y++) {
 					date.setMinutes(date.getMinutes() + 10);
 					value = {
-						"PPM": 0,
+						"data": 0,
 						"date": new Date(date.getTime()),
 						"limit": 800
 					}
@@ -107,10 +243,9 @@ function attributeData(){
 			}
 		}
 
-
 	}
 	else if(when["when"] === "week"){
-		let date = new Date();
+		let date = new Date(datechose);
 
 		date.setDate(date.getDate() - date.getDay() + (date.getDay() == 0 ? -6:1))
 		date.setHours(0);
@@ -124,7 +259,7 @@ function attributeData(){
 		date.setDate(date.getDate() +6)
 
 		let max = date.getTime()
-		console.log(" avant : " +new Date(min)+ " max : "+new Date(max));
+		//console.log(" avant : " +new Date(min)+ " max : "+new Date(max));
 		let data =0;
 		let dates = null;
 		let limit = 800;
@@ -187,7 +322,6 @@ function attributeData(){
 						boolgetfirst = false;
 					}
 
-					console.log("before: ",before)
 					if(before>1){
 					nbskip = before
 
@@ -200,7 +334,6 @@ function attributeData(){
 								"date": date,
 								"limit": 800
 							}
-							console.log("0",value)
 							datatab.push(value);
 
 						}
@@ -217,7 +350,7 @@ function attributeData(){
 								"date": date,
 								"limit": 800
 							}
-							console.log("1",value)
+
 							datatab.push(value);
 
 						}
@@ -227,7 +360,7 @@ function attributeData(){
 							"date": dataDay[i].date,
 							limit: 800
 						}
-						console.log("2",value)
+
 
 						datatab.push(value);
 
@@ -238,7 +371,7 @@ function attributeData(){
 						"date": dataDay[i].date,
 						limit: 800
 					}
-					console.log("3",value)
+
 
 					datatab.push(value);
 
@@ -270,7 +403,7 @@ function attributeData(){
 	else if(when["when"] === "month") {
 
 
-		let date = new Date();
+		let date = new Date(datechose);
 
 		date.setDate(1)
 		date.setHours(0);
@@ -286,7 +419,7 @@ function attributeData(){
 		date.setSeconds(59);
 
 		let max = date.getTime()
-		console.log(" avant : " + new Date(min) + " max : " + new Date(max));
+		//console.log(" avant : " + new Date(min) + " max : " + new Date(max));
 		let data =0;
 		let dates = null;
 		let limit = 800;
@@ -357,7 +490,6 @@ function attributeData(){
 									"limit": 800
 								}
 								datatab.push(value);
-
 							}
 							before = 0;
 							datatab.push(dataDay[0]);
@@ -418,24 +550,33 @@ function attributeData(){
 		}
 		}
 	chart.data = datatab;
+	console.log(chart.data)
 	if(status === true){
 		createGraph();
 	}
 	switch (when["when"]) {
-		case "day":dateAxis.baseInterval = {
+		case "day":
+			dateAxis.baseInterval = {
 			timeUnit: "minute",
 			count: 10
 		};
+			dateAxis.title.text= +new Date(chart.data[0].date).getDate() +" " + monthNames[new Date(chart.data[0].date).getUTCMonth()] +" "+ new Date(chart.data[0].date).getFullYear()
 			break;
-		case "week": dateAxis.baseInterval = {
+		case "week":
+			dateAxis.baseInterval = {
 			timeUnit: "day",
 			count: 1
 		};
+			dateAxis.title.text= "Du "+new Date(chart.data[0].date).getDate() +" " + monthNames[new Date(chart.data[0].date).getUTCMonth()] + " au " + new Date(chart.data[chart.data.length-1].date).getDate() +" " + monthNames[new Date(chart.data[chart.data.length-1].date).getUTCMonth()] + " "+new Date(chart.data[chart.data.length-1].date).getFullYear()
+
 			break;
-		case "month": dateAxis.baseInterval = {
+		case "month":
+			dateAxis.baseInterval = {
 			timeUnit: "day",
 			count: 1
 		};
+			dateAxis.title.text= "Du "+new Date(chart.data[0].date).getDate() +" " + monthNames[new Date(chart.data[0].date).getMonth()] + " au " + new Date(chart.data[chart.data.length-1].date).getDate() +" " + monthNames[new Date(chart.data[chart.data.length-1].date).getMonth()] + " "+new Date(chart.data[chart.data.length-1].date).getFullYear()
+
 			break;
 	}
 	switch (when["what"]) {
@@ -462,10 +603,8 @@ function attributeData(){
 			boolseries = true;
 			break;
 	}
-	console.log("chart.dada",chart.data)
-	console.log("series",chart.series)
+	//console.log("chart.dada",chart.data)
 	chart.validateData();
-
 }
 function createGraph() {
 	if(chart.data.length != 0) {
