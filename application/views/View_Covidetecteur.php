@@ -78,7 +78,7 @@ $this->load->helper('html');?>
     <div class="card border-0 shadow my-4">
       <div class="card-body p-3">
         <div class="text-footer">
-          <p>Par STELZLE Alban, RAYMOND Enveric, BOUCHENY Nicolas, . Sous la direction de VALARCHER Pierre<br>Crée le : 10/11/2020 Dernière mise à jour : 26/06/2021<br>Tous droits réservés ©</p>
+          <p>Par STELZLE Alban, RAYMOND Enveric, BOUCHENY Nicolas. Sous la direction de VALARCHER Pierre.<br>Créé le : 10/11/2020 Dernière mise à jour : 26/06/2021.<br>Tous droits réservés ©</p>
           <img class="hov" src="<?php echo base_url()?>images/logo-upec-iut.png" class="logo-upec-iut" onClick="location.href='https://www.iutsf.u-pec.fr/departements/informatique'">
         </div>
       </div>
