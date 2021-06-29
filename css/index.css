@@ -10,18 +10,19 @@ html
 body
 {
 	background: url('../images/fond.jpg') no-repeat center center fixed;
-  	-webkit-background-size: cover;
-  	-moz-background-size: cover;
-  	background-size: cover;
-  	-o-background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
 }
 
-li, img { /* non selectable image*/
--webkit-user-select: none;
--khtml-user-select: none;
--moz-user-select: none;
--o-user-select: none;
-user-select: none;
+li, img 
+{ /* non selectable image*/
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	user-select: none;
 }
 
 footer
@@ -30,6 +31,18 @@ footer
 	bottom: 0;
 	width: 100%;
 	text-align: center;
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ header ]*/
+.icon-home
+{
+	width:  50%;
+}
+
+.icon-info
+{
+	width: 75%;
 }
 
 /*//////////////////////////////////////////////////////////////////
@@ -43,17 +56,6 @@ footer
 {
   opacity: 0.88;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 /*//////////////////////////////////////////////////////////////////
 [ page confirmation ]*/
@@ -78,10 +80,10 @@ footer
 
 
 /*==================================VERSION ORDINATEUR==================================*/
-@media screen and (min-width: 800px){
+@media screen and (min-width: 500px){
 
-	/*//////////////////////////////////////////////////////////////////
-[ Logo et Titre du site]*/
+/*//////////////////////////////////////////////////////////////////
+[ Logo et Titre du site de la page d'accueil]*/
 .logo-nom-site h1
 {
 	color: white;
@@ -99,7 +101,7 @@ footer
 }
 
 /*//////////////////////////////////////////////////////////////////
-[ Boutons / Se connecter - Inscription ]*/
+[ Boutons blanc / Se connecter - Inscription ]*/
 .connexion, .inscription
 {
 	display: block;
@@ -117,19 +119,20 @@ footer
 	width: 24%;
 }
 
-
 /*//////////////////////////////////////////////////////////////////
 [ Footer ]*/
-footer{
+footer
+{
 	bottom: 0;
-    color: #707070;
-    height: 2em;
-    left: 0;
-    margin-top: 5%;
-    position: relative;
-    width:100%;
-    line-height: 1.;
+  color: #707070;
+  height: 2em;
+  left: 0;
+  margin-top: 5%;
+  position: relative;
+  width:100%;
+  line-height: 1.;
 }
+
 footer img
 {
 	width: 15%;
@@ -155,14 +158,14 @@ footer img
 .logo-page-inscription
 {
 	margin-left: auto;
-    margin-right: auto;
+ 	margin-right: auto;
 	width: 20%
 }
 
 .logo-page-connexion
 {
 	margin-left: auto;
-    margin-right: auto;
+  margin-right: auto;
 	width: 20%
 }
 
@@ -180,47 +183,9 @@ footer img
 
 .taille-carte-2
 {
-	height: 250px;
-}
-
-.titre-menu-capteurs
-{
-	margin-top: 20px;
-	color: white;
-}
-
-.icon-croix
-{
-	width:25%;
-  position: absolute;
-  top: 50%;
-  left: 37%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-
-}
-
-.icon-home-capteur
-{
-	width: 50%;
-}
-
-
-}
-
-@media screen and (max-width: 1000px) and (max-width: 800px){
- /*//////////////////////////////////////////////////////////////////
-[ Page menu des capteurs ]*/
-.taille-carte
-{
 	width: 150%;
 }
 
-.taille-carte-2
-{
-	height: 300px;
-}
-
 .titre-menu-capteurs
 {
 	margin-top: 20px;
@@ -229,25 +194,27 @@ footer img
 
 .icon-croix
 {
-	width:25%;
+	width:36%;
   position: absolute;
   top: 50%;
-  left: 37%;
+  left: 33%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 
 }
-
 
 .icon-home-capteur
 {
 	width: 50%;
 }
 
+
 }
 
+
+
 /*==================================VERSION SMARTPHONE==================================*/
-@media screen and (max-width: 800px){
+@media screen and (max-width: 500px){
 
 	/*//////////////////////////////////////////////////////////////////
 [ Logo et Titre du site]*/
@@ -267,9 +234,8 @@ footer img
 	width: 20%;
 }
 
-
 /*//////////////////////////////////////////////////////////////////
-[ Boutons / Se connecter - Inscription ]*/
+[ Boutons blanc / Se connecter - Inscription ]*/
 .connexion, .inscription
 {
 	display: block;
@@ -288,18 +254,17 @@ footer img
 	margin-top: 2%;
 }
 
-
 /*//////////////////////////////////////////////////////////////////
 [ Footer ]*/
 footer{
 	bottom: 0;
-    color: #707070;
-    height: 2em;
-    left: 0;
-    margin-top: 15%;
-    position: relative;
-    width:100%;
-    line-height: 1.;
+  color: #707070;
+  height: 2em;
+  left: 0;
+  margin-top: 15%;
+  position: relative;
+  width:100%;
+  line-height: 1.;
 }
 footer img
 {
@@ -315,14 +280,14 @@ footer img
 .logo-page-inscription
 {
 	margin-left: auto;
-    margin-right: auto;
+  margin-right: auto;
 	width: 30%
 }
 
 .logo-page-connexion
 {
 	margin-left: auto;
-    margin-right: auto;
+  margin-right: auto;
 	width: 30%
 }
 
@@ -346,24 +311,23 @@ footer img
 {
 	margin-top: 20px;
 	color: white;
-	margin-left: 20%;
+	font-size: 170%;
 }
 
 .icon-croix
 {
-	width:25%;
-  	position: absolute;
-  	top: 50%;
-  	left: 37%;
-  	-ms-transform: translateY(-50%);
-  	transform: translateY(-50%);
+	width:50%;
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 
 }
 
-
 .icon-home-capteur
 {
-	width: 30%;
+	width: 38%;
 }
 
 }
