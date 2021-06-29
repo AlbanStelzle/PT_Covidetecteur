@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
 
-
-
 <body>
   
   <!-- Navigation -->
@@ -10,7 +8,7 @@
     <ul class="navbar-nav">
       <li class="nav-item active">
         <a class="hov" href="<?php echo base_url()?>">
-          <img src="<?php echo base_url()?>/images/icon-home.png" style="width:50%">
+          <img src="<?php echo base_url()?>/images/icon-home.png" class="icon-home">
         </a>
       </li>
     </ul>
@@ -24,7 +22,7 @@
         <li class="nav-item">
 		      <!-- Boutton qui actionne le modale (pop-up)-->
    			  <a data-toggle="modal" data-target="#exampleModalCenter">
-            <img src="<?php echo base_url()?>/images/icon-info.png" alt="logo" style="width:75%" >
+            <img src="<?php echo base_url()?>/images/icon-info.png" class="icon-info hov" alt="logo">
           </a>
         </li>
       </ul>
@@ -70,49 +68,48 @@
 
         <!-- Form -->
         <div class="form-group">
-			<?php echo form_open();
-			echo form_input(['type'=>'text',
-								'class'=> 'form-size form-control my-3 mx-auto',
-								'placeholder'=>'Prénom',
-								'name'=>'firstname']);
+    			<?php echo form_open();
+    			echo form_input(['type'=>'text',
+    								'class'=> 'form-size form-control my-3 mx-auto',
+    								'placeholder'=>'Prénom',
+    								'name'=>'firstname']);
 
-			echo form_input(['type'=>'text',
-								'class'=> 'form-size form-control my-3 mx-auto',
-								'placeholder'=>'Nom',
-								'name'=>'name']);
+    			echo form_input(['type'=>'text',
+    								'class'=> 'form-size form-control my-3 mx-auto',
+    								'placeholder'=>'Nom',
+    								'name'=>'name']);
 
-			echo form_input(['type'=>'email',
-								'class'=> 'form-size form-control my-3 mx-auto',
-								'placeholder'=>'Adresse email',
-								'name'=>'email']);
+    			echo form_input(['type'=>'email',
+    								'class'=> 'form-size form-control my-3 mx-auto',
+    								'placeholder'=>'Adresse email',
+    								'name'=>'email']);
 
-			echo form_password(['class'=> 'form-size form-control my-3 mx-auto',
-								'placeholder'=>'Mot de passe',
-								'name'=>'password']);
-			echo form_password(['class'=> 'form-size form-control my-3 mx-auto',
-								'placeholder'=>'Confirmez mot de passe',
-								'name'=>'password_confirm']);
+    			echo form_password(['class'=> 'form-size form-control my-3 mx-auto',
+    								'placeholder'=>'Mot de passe',
+    								'name'=>'password']);
+    			echo form_password(['class'=> 'form-size form-control my-3 mx-auto',
+    								'placeholder'=>'Confirmez mot de passe',
+    								'name'=>'password_confirm']);
+    			?>
+          <br>
 
-			?>
-        <br>
-
-        <!-- Confirmation button -->
-        <div class="text-center">
-			<?php
-			echo form_submit(['type'=>'submit',
-							'class'=>'btn btn-success rounded-pill',
-							'style'=>'width:50%'],"S'inscrire");
-			echo form_close();
-			?>
-		</div>
-    <br>
-    <div class="text-center">
-      <p class="lead mb-0 text-secondary">Profitez de l’innovation pour un air plus sain !</p>
+          <!-- Confirmation button -->
+          <div class="text-center">
+      			<?php
+      			echo form_submit(['type'=>'submit',
+      							'class'=>'btn btn-success rounded-pill',
+      							'style'=>'width:50%'],"S'inscrire");
+      			echo form_close();
+      			?>
+  		    </div>
+          <br>
+          <div class="text-center">
+            <p class="lead mb-0 text-secondary">Profitez de l’innovation pour un air plus sain !</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
-
-
 
 </body>
 
