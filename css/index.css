@@ -170,10 +170,81 @@ footer img
 	width: 50%;
 }
 
+/*//////////////////////////////////////////////////////////////////
+[ Page menu des capteurs ]*/
+.taille-carte
+{
+	width: 150%;
+	margin-top: 5%;
+}
+
+.taille-carte-2
+{
+	height: 250px;
+}
+
+.titre-menu-capteurs
+{
+	margin-top: 20px;
+	color: white;
+}
+
+.icon-croix
+{
+	width:25%;
+  position: absolute;
+  top: 50%;
+  left: 37%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+
+}
+
+.icon-home-capteur
+{
+	width: 50%;
+}
+
+
+}
+
+@media screen and (max-width: 1000px) and (max-width: 800px){
+ /*//////////////////////////////////////////////////////////////////
+[ Page menu des capteurs ]*/
+.taille-carte
+{
+	width: 150%;
+}
+
+.taille-carte-2
+{
+	height: 300px;
+}
+
+.titre-menu-capteurs
+{
+	margin-top: 20px;
+	color: white;
+}
+
+.icon-croix
+{
+	width:25%;
+  position: absolute;
+  top: 50%;
+  left: 37%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 
 }
 
 
+.icon-home-capteur
+{
+	width: 50%;
+}
+
+}
 
 /*==================================VERSION SMARTPHONE==================================*/
 @media screen and (max-width: 800px){
@@ -258,4 +329,41 @@ footer img
 .form-size{
 	width: 70%;
 }
+
+/*//////////////////////////////////////////////////////////////////
+[ Page menu des capteurs ]*/
+.taille-carte
+{
+	width: 100%;
+}
+
+.taille-carte-2
+{
+	height: 300px;
+}
+
+.titre-menu-capteurs
+{
+	margin-top: 20px;
+	color: white;
+	margin-left: 20%;
+}
+
+.icon-croix
+{
+	width:25%;
+  	position: absolute;
+  	top: 50%;
+  	left: 37%;
+  	-ms-transform: translateY(-50%);
+  	transform: translateY(-50%);
+
+}
+
+
+.icon-home-capteur
+{
+	width: 30%;
+}
+
 }
