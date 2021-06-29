@@ -5,16 +5,14 @@ $this->load->helper('form');
 <!DOCTYPE html>
 <html>
 
-
-
 <body>
 
-  <!-- Navigation -->
+ <!-- Navigation -->
   <nav class="navbar navbar-expand-sm">
     <ul class="navbar-nav">
       <li class="nav-item active">
         <a class="hov" href="<?php echo base_url()?>">
-          <img src="<?php echo base_url()?>/images/icon-home.png" style="width:50%">
+          <img src="<?php echo base_url()?>/images/icon-home.png" class="icon-home">
         </a>
       </li>
     </ul>
@@ -22,13 +20,13 @@ $this->load->helper('form');
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
           <a class="nav-link text-white hov" target="_top" href = "mailto: le.covidetecteur@gmail.com">Contact
-           <span class="sr-only">(current)</span>
+            <span class="sr-only">(current)</span>
           </a>
         </li>
         <li class="nav-item">
           <!-- Boutton qui actionne le modale (pop-up)-->
           <a data-toggle="modal" data-target="#exampleModalCenter">
-            <img src="<?php echo base_url()?>/images/icon-info.png" alt="logo" style="width:75%" >
+            <img src="<?php echo base_url()?>/images/icon-info.png" class="icon-info hov" alt="logo">
           </a>
         </li>
       </ul>
@@ -107,10 +105,6 @@ $this->load->helper('form');
         ?>
       </div>
       <br>
-
-      <!-- Confirmation button -->
-
-
       <br>
 
       <div class="text-center">
@@ -118,8 +112,6 @@ $this->load->helper('form');
       </div>
     </div>
   </div>
-
-
 
 </body>
 
