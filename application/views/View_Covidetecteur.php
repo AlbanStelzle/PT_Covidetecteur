@@ -8,11 +8,11 @@ $this->load->helper('html');?>
     <ul class="navbar-nav">
       <li class="nav-item active">
         <a>
-          <img src="<?php echo base_url()?>images/icon-home.png" alt="logo" style="width:50%">
+          <img src="<?php echo base_url()?>/images/icon-home.png" class="icon-home">
         </a>
       </li>
     </ul>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
+    <div class="collapse navbar-collapse">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
           <a class="nav-link text-white hov" target="_top" href = "mailto: le.covidetecteur@gmail.com">Contact
@@ -22,8 +22,8 @@ $this->load->helper('html');?>
         <li class="nav-item">
           <!-- Boutton qui actionne le modale (pop-up)-->
           <a data-toggle="modal" data-target="#exampleModalCenter">
-            <img class="hov" src="<?php echo base_url()?>images/icon-info.png" alt="logo" style="width:75%" >
-           </a>
+            <img src="<?php echo base_url()?>/images/icon-info.png" class="icon-info hov" alt="logo">
+          </a>
         </li>
       </ul>
     </div>
