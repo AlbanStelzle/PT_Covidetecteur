@@ -19,6 +19,36 @@ $this->load->helper('html'); ?>
 	<link rel="icon" href="<?php echo base_url() ?>images/logo2.png">
 
 	<!-- Navigation -->
+
+	<nav class="navbar navbar-expand-sm">
+	    <ul class="navbar-nav">
+	      <li class="nav-item active">
+	        <a class="hov" href="<?php echo base_url()?>">
+	          <img src="<?php echo base_url()?>/images/icon-home.png" class="icon-home-graphiques">
+	        </a>
+	      </li>
+	      <li class="nav-item active">
+	        <a class="hov" href="<?php echo base_url('index.php/MenuPrincipal')?>">
+	          <img src="<?php echo base_url()?>/images/icon-retour-capteurs.png" class="icon-retour-capteurs">
+	        </a>
+	      </li>
+	    </ul>
+	    <div class="collapse navbar-collapse">
+	      <ul class="navbar-nav ml-auto">
+	        <li class="nav-item active">
+	          <a class="nav-link text-white hov" target="_top" href = "mailto: le.covidetecteur@gmail.com">Contact
+	            <span class="sr-only">(current)</span>
+	          </a>
+	        </li>
+	        <li class="nav-item">
+	          <!-- Boutton qui actionne le modale (pop-up)-->
+	          <a data-toggle="modal" data-target="#exampleModalCenter">
+	            <img src="<?php echo base_url()?>/images/icon-info.png" class="icon-info hov" alt="logo">
+	          </a>
+	        </li>
+	      </ul>
+	    </div>
+  	</nav>
  
 	<!-- Modale (pop-up) -->
 	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
