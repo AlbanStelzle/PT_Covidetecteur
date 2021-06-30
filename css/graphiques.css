@@ -1,10 +1,58 @@
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+/*==================================VERSION ORDINATEUR==================================*/
+@media screen and (min-width: 500px){
+
+.chart-container-size{
+  width:80%
 }
 
-#chartdiv {
+
+#chart_co2 {
   width: 100%;
   height: 500px;
+}
+
+#chart_temperature {
+  width: 100%;
+  height: 500px;
+}
+
+#chart_humidite {
+  width: 100%;
+  height: 500px;
+}
+
+.icon-home-graphiques
+{
+  width: 50%;
+}
+
+.icon-retour-capteurs
+{
+  width: 50%;
+  margin-top: 2%;
+}
+
+}
+
+
+/*==================================VERSION SMARTPHONE==================================*/
+@media screen and (max-width: 500px){
+
+.chart-container-size{
+  width: 100%;
+}
+
+.icon-home-graphiques
+{
+  width: 24%;
+}
+
+.icon-retour-capteurs
+{
+  width: 80%;
+  margin-top: 2%;
+  margin-left: 1%;
 }
 
 #chart_co2 {
@@ -22,3 +70,4 @@ body {
   height: 500px;
 }
 
+}
